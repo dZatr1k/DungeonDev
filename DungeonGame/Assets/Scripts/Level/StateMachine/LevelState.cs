@@ -2,6 +2,7 @@ namespace Level
 {
     public enum LevelState
     {
-        UnitSelectState
+        UnitSelectState,
+        MainGameState
     }
 }

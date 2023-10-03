@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Level
 {
+    [RequireComponent(typeof(LevelStateMachine))]
     public class Level : MonoBehaviour
     {
 
