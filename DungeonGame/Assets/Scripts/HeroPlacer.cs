@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Field
+namespace GameBoard
 {
     public class HeroPlacer : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace Field
+namespace GameBoard
 {
     public class Cell : MonoBehaviour, IPointerClickHandler
     {
@@ -14,9 +14,6 @@ namespace Field
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Click");
-            gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;  // это стоит делать в Start,
-                                                                           // но в дальнейшем эта строчка просто удалиться
             OnCellClick?.Invoke(this);
         }
 
