@@ -1,62 +1,54 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class CustomUnityPool
+namespace ObjectPool
 {
-    private ObjectPool<GameObject> _pool;
-
-    private GameObject _prefab;
-
-    public CustomUnityPool(GameObject prefab, int prewarmObjectsCount)
+    public class CustomUnityPool
     {
-        _prefab = prefab;
-        _pool = new ObjectPool<GameObject>(OnCreate, OnGet, OnRelease, OnDestroy, false, maxSize:prewarmObjectsCount);
-    }
+        private ObjectPool<GameObject> _pool;
+        private GameObject _prefab;
+        private Transform _parent;
+        private Transform _parentOfParents;
 
-    public GameObject Get()
-    {
-        var obj = _pool.Get();
-        return obj;
-    }
+        public CustomUnityPool(GameObject prefab, int prewarmObjectsCount, string parentName, Transform parentOfParents)
+        {
+            _prefab = prefab;
+            _pool = new ObjectPool<GameObject>(OnCreate, OnGet, OnRelease, OnDestroy, false, maxSize: prewarmObjectsCount);
+            _parentOfParents = parentOfParents.transform;
+            _parent = new GameObject(parentName).transform;
+            _parent.parent = _parentOfParents;
+        }
 
-    public void Release(GameObject obj)
-    {
-        _pool.Release(obj);
-    }
+        public GameObject Get()
+        {
+            var obj = _pool.Get();
+            return obj;
+        }
 
-    /// <summary>
-    /// КАК уничтожаем объект
-    /// </summary>
-    /// <param name="obj"></param>
-    private void OnDestroy(GameObject obj)
-    {
-        GameObject.Destroy(obj);
-    }
+        public void Release(GameObject obj)
+        {
+            _pool.Release(obj);
+        }
 
-    /// <summary>
-    /// Что делаем с объектом когда его деактивируем
-    /// </summary>
-    /// <param name="obj"></param>
-    private void OnRelease(GameObject obj)
-    {
-        obj.gameObject.SetActive(false);
-    }
+        private void OnDestroy(GameObject obj)
+        {
+            GameObject.Destroy(obj);
+        }
 
-    /// <summary>
-    /// Что делаем с объектом когда достаём его из пула
-    /// </summary>
-    /// <param name="obj"></param>
-    private void OnGet(GameObject obj)
-    {
-        obj.gameObject.SetActive(true);
-    }
+        private void OnRelease(GameObject obj)
+        {
+            obj.gameObject.SetActive(false);
+        }
 
-    /// <summary>
-    /// КАК мы создаём объект
-    /// </summary>
-    /// <returns></returns>
-    private GameObject OnCreate()
-    {
-        return GameObject.Instantiate(_prefab);
+        private void OnGet(GameObject obj)
+        {
+            obj.gameObject.SetActive(true);
+        }
+
+        private GameObject OnCreate()
+        {
+            var obj = GameObject.Instantiate(_prefab, _parent);
+            return obj;
+        }
     }
 }

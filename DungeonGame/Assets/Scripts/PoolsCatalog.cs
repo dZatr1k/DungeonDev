@@ -2,18 +2,28 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolsCatalog : MonoBehaviour 
+namespace ObjectPool
 {
-    private readonly Dictionary<Type, CustomUnityPool> _pools = new Dictionary<Type, CustomUnityPool>();
-   
-    public CustomUnityPool GetPool<T>(T obj) where T : MonoBehaviour
+    public class PoolsCatalog : MonoBehaviour
     {
-        Type typeOfObject = obj.GetType();
+        private readonly Dictionary<Type, CustomUnityPool> _pools = new Dictionary<Type, CustomUnityPool>();
+        private GameObject _parent;
 
-        if (!_pools.ContainsKey(typeOfObject))
+        private void Start()
         {
-            _pools.Add(typeOfObject, new CustomUnityPool(obj.gameObject, 2));
+            _parent = new GameObject("Pools");
         }
-        return _pools[typeOfObject];
+
+        public CustomUnityPool GetPool<T>(T obj) where T : MonoBehaviour
+        {
+            Type typeOfObject = obj.GetType();
+
+            if (!_pools.ContainsKey(typeOfObject))
+            {
+                _pools.Add(typeOfObject, new CustomUnityPool(obj.gameObject, 7, typeOfObject.ToString(), _parent.transform));
+            }
+            return _pools[typeOfObject];
+        }
     }
+
 }
