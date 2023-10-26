@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Level
+namespace LevelLogic
 {
     public class UnitSelectState : LevelStateBase
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Level
+namespace LevelLogic
 {
     [CreateAssetMenu(fileName = "New LevelData", menuName = "LevelData")]
     public class LevelData : ScriptableObject

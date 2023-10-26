@@ -1,41 +1,34 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Level;
+using LevelLogic;
 
 namespace Card
 {
     public class Card : MonoBehaviour, IPointerClickHandler
     {
-        private ICardBehaviour _currentCardBehaviour;
+        public static event Action<Card> OnClick;
+        
+        [SerializeField] private int _id;
 
-        private void OnEnable()
+        public int ID
         {
-            LevelStateMachine.OnStateChanged += HandleState;
-        }
-
-        private void OnDisable()
-        {
-            LevelStateMachine.OnStateChanged += HandleState;
-        }
-
-        private void HandleState(LevelState state)
-        {
-            if (state == LevelState.UnitSelectState)
+            get
             {
-                _currentCardBehaviour = new PreGameCardBehaviour();
+                return _id;
             }
-            else if(state == LevelState.MainGameState)
+            set
             {
-                _currentCardBehaviour = new MainGameCardBehaviour();
+                if(_id >= 0)
+                    _id = value;
+                else
+                    Debug.LogError("ID must be non-negative");
             }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (_currentCardBehaviour != null)
-            {
-                _currentCardBehaviour.Click(this);
-            }
+            OnClick?.Invoke(this);
         }
     }
 }

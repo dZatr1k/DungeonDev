@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Level
+namespace LevelLogic
 {
     [RequireComponent(typeof(Level))]
     public class LevelStateMachine : MonoBehaviour
     {
-        public static UnityAction<LevelState> OnStateChanged;
+        public UnityAction<LevelState> OnStateChanged;
 
         private readonly LevelStateBase _unitSelectState = new UnitSelectState();
         private readonly LevelMainGameState _mainGameState = new LevelMainGameState();
