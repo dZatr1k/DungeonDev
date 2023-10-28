@@ -24,13 +24,11 @@ namespace LevelLogic
             else if(SceneManager.GetActiveScene().name != _contextSceneName)
             {
                 Debug.LogError($"Component Level cant's exist out of scene {_contextSceneName}");
-                DestroyImmediate(this);
                 return;
             }
             if(_instance != null)
             {
                 Debug.LogError("Component Level already exist in current scene");
-                DestroyImmediate(this);
                 return;
             }
             _instance = this;
