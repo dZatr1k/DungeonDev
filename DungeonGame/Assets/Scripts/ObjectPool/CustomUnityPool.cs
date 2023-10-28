@@ -10,10 +10,10 @@ namespace ObjectPool
         private Transform _parent;
         private Transform _parentOfParents;
 
-        public CustomUnityPool(GameObject prefab, int prewarmObjectsCount, string parentName, Transform parentOfParents)
+        public CustomUnityPool(GameObject prefab, int maxSize, string parentName, Transform parentOfParents)
         {
             _prefab = prefab;
-            _pool = new ObjectPool<GameObject>(OnCreate, OnGet, OnRelease, OnDestroy, false, maxSize: prewarmObjectsCount);
+            _pool = new ObjectPool<GameObject>(OnCreate, OnGet, OnRelease, OnDestroy, false, maxSize: maxSize);
             _parentOfParents = parentOfParents.transform;
             _parent = new GameObject(parentName).transform;
             _parent.parent = _parentOfParents;

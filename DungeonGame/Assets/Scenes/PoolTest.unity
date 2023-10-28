@@ -664,6 +664,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ae87e5c13a7fc4b8973e82b8af50c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolsSettingsPair:
+  - _objectType: Energy
+    _size: 3
+    _prefab: {fileID: 1902374994046709331, guid: 5d59627f259bd1e429564f0c79679961, type: 3}
+  - _objectType: Skull
+    _size: 2
+    _prefab: {fileID: 6949326367339467970, guid: f04d5a6fafaedb241a7e0e22eaf5d2fe, type: 3}
 --- !u!4 &579595666
 Transform:
   m_ObjectHideFlags: 0
