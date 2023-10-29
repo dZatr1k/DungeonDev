@@ -37,6 +37,11 @@ namespace ObjectPool
 
         private void OnRelease(GameObject obj)
         {
+            IPoolItem poolItem;
+            obj.TryGetComponent<IPoolItem>(out poolItem);
+            if(poolItem != null)
+                poolItem.SetDefaultSettings();
+
             obj.gameObject.SetActive(false);
         }
 

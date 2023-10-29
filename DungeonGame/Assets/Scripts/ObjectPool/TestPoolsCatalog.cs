@@ -10,7 +10,7 @@ public class TestPoolsCatalog : MonoBehaviour
 
     private Dictionary<Type, List<GameObject>> _objectsFormPool = new Dictionary<Type, List<GameObject>>();
 
-    private void GetItem<T>(T obj) where T : MonoBehaviour
+    private void GetItem<T>(T obj) where T : MonoBehaviour, IPoolItem
     {
         var type = obj.GetType();
         _pool = _poolsCatalog.GetPool(obj);
@@ -28,19 +28,9 @@ public class TestPoolsCatalog : MonoBehaviour
         GetItem<Energy>(obj);
     }
 
-    public void GetItem(Skull obj)
-    {
-        GetItem<Skull>(obj);
-    }
-
     public void RelaseItem(Energy obj)
     {
         RelaseItem<Energy>(obj);
-    }
-
-    public void RelaseItem(Skull obj)
-    {
-        RelaseItem<Skull>(obj);
     }
 
 
