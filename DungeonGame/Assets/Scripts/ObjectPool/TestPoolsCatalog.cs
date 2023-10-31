@@ -8,15 +8,15 @@ public class TestPoolsCatalog : MonoBehaviour
     [SerializeField] private PoolsCatalog _poolsCatalog;
     private CustomUnityPool _pool;
 
-    private Dictionary<Type, List<GameObject>> _objectsFormPool = new Dictionary<Type, List<GameObject>>();
+    private Dictionary<Type, List<IPoolItem>> _objectsFormPool = new Dictionary<Type, List<IPoolItem>>();
 
-    private void GetItem<T>(T obj) where T : MonoBehaviour, IPoolItem
+    private void GetItem<T>(T obj) where T : IPoolItem
     {
         var type = obj.GetType();
         _pool = _poolsCatalog.GetPool(obj);
         if (!_objectsFormPool.ContainsKey(type))
         {
-            var listForDict = new List<GameObject>();
+            var listForDict = new List<IPoolItem>();
             _objectsFormPool.Add(obj.GetType(), listForDict);
         }
         _objectsFormPool[type].Add(_pool.Get());
@@ -34,7 +34,7 @@ public class TestPoolsCatalog : MonoBehaviour
     }
 
 
-    private void RelaseItem<T>(T obj) where T : MonoBehaviour
+    private void RelaseItem<T>(T obj) where T : IPoolItem
     {
         var type = obj.GetType();
         _pool = _poolsCatalog.GetPool(obj);

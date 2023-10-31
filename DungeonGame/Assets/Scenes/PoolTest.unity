@@ -526,10 +526,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolsSettingsPair:
-  - _objectType: Energy
-    _size: 3
-    _prefab: {fileID: 1902374994046709331, guid: 5d59627f259bd1e429564f0c79679961, type: 3}
-  _defaultPoolSize: 0
+  - _size: 4
+    _gameObject: {fileID: 1902374994046709331, guid: 5d59627f259bd1e429564f0c79679961, type: 3}
+  - _size: 2
+    _gameObject: {fileID: 4859585795024291255, guid: c47c2558e5ae4944e9fb1b4cc73dc9f8, type: 3}
+  _defaultPoolSize: 1
 --- !u!4 &579595666
 Transform:
   m_ObjectHideFlags: 0

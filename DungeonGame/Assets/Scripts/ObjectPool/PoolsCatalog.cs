@@ -18,20 +18,20 @@ namespace ObjectPool
             _parent = new GameObject("Pools");
             for (int i = 0; i < _poolsSettingsPair.Count; i++)
             {
-                var pool = new CustomUnityPool(_poolsSettingsPair[i].Prefab, _poolsSettingsPair[i].Size,
-                                               _poolsSettingsPair[i].ObjectType.ToString(), _parent.transform);
-                _pools.Add(_poolsSettingsPair[i].ObjectType, pool);
+                var poolItem = _poolsSettingsPair[i].PoolItem;
+                var pool = new CustomUnityPool(poolItem, _poolsSettingsPair[i].Size, poolItem.ItemType.ToString(), _parent.transform);
+                _pools.Add(poolItem.ItemType, pool);
             }
 
         }
 
-        public CustomUnityPool GetPool<T>(T obj) where T : MonoBehaviour
+        public CustomUnityPool GetPool<T>(T obj) where T : IPoolItem
         {
             Type typeOfObject = obj.GetType();
 
             if (!_pools.ContainsKey(typeOfObject))
             {
-                _pools.Add(typeOfObject, new CustomUnityPool(obj.gameObject, _defaultPoolSize, typeOfObject.ToString(), _parent.transform));
+                _pools.Add(typeOfObject, new CustomUnityPool(obj, _defaultPoolSize, typeOfObject.ToString(), _parent.transform));
             }
             return _pools[typeOfObject];
         }
