@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4859585795024291254}
   - component: {fileID: -8039120577952052760}
   - component: {fileID: -3005854715658035036}
+  - component: {fileID: 8476264434087214189}
   m_Layer: 6
   m_Name: Cell
   m_TagString: Untagged
@@ -124,3 +125,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c1b57db9e02144abb81818f33dbede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8476264434087214189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4859585795024291255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8ad19ba8cf5fa42a28d63bc248f259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sprites:
+  - {fileID: -728790428, guid: 0d712247b56a98549911ec007e3284c3, type: 3}
+  - {fileID: -1432179849, guid: 0d712247b56a98549911ec007e3284c3, type: 3}
+  - {fileID: 817379019, guid: 0d712247b56a98549911ec007e3284c3, type: 3}
+  - {fileID: 2081739303, guid: 0d712247b56a98549911ec007e3284c3, type: 3}
+  - {fileID: -1616442446, guid: 0d712247b56a98549911ec007e3284c3, type: 3}
+  - {fileID: -402553657, guid: 0d712247b56a98549911ec007e3284c3, type: 3}
+  - {fileID: -1258642668, guid: 0d712247b56a98549911ec007e3284c3, type: 3}
+  - {fileID: -1383147327, guid: 0d712247b56a98549911ec007e3284c3, type: 3}
