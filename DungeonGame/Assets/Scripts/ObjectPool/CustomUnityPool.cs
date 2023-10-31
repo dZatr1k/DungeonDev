@@ -5,50 +5,51 @@ namespace ObjectPool
 {
     public class CustomUnityPool
     {
-        private ObjectPool<GameObject> _pool;
-        private GameObject _prefab;
+        private ObjectPool<IPoolItem> _pool;
+        private IPoolItem _poolItem;
         private Transform _parent;
         private Transform _parentOfParents;
 
-        public CustomUnityPool(GameObject prefab, int maxSize, string parentName, Transform parentOfParents)
+        public CustomUnityPool(IPoolItem prefab, int maxSize, string parentName, Transform parentOfParents)
         {
-            _prefab = prefab;
-            _pool = new ObjectPool<GameObject>(OnCreate, OnGet, OnRelease, OnDestroy, false, maxSize: maxSize);
+            _poolItem = prefab;
+            _pool = new ObjectPool<IPoolItem>(OnCreate, OnGet, OnRelease, OnDestroy, false, maxSize: maxSize);
             _parentOfParents = parentOfParents.transform;
             _parent = new GameObject(parentName).transform;
             _parent.parent = _parentOfParents;
         }
 
-        public GameObject Get()
+        public IPoolItem Get()
         {
             var obj = _pool.Get();
             return obj;
         }
 
-        public void Release(GameObject obj)
+        public void Release(IPoolItem obj)
         {
             _pool.Release(obj);
         }
 
-        private void OnDestroy(GameObject obj)
+        private void OnDestroy(IPoolItem obj)
         {
-            GameObject.Destroy(obj);
+            Object.Destroy(obj.GameObject);
         }
 
-        private void OnRelease(GameObject obj)
+        private void OnRelease(IPoolItem obj)
         {
-            obj.gameObject.SetActive(false);
+            obj.SetDefaultSettings();
+            obj.GameObject.SetActive(false);
         }
 
-        private void OnGet(GameObject obj)
+        private void OnGet(IPoolItem obj)
         {
-            obj.gameObject.SetActive(true);
+            obj.GameObject.SetActive(true);
         }
 
-        private GameObject OnCreate()
+        private IPoolItem OnCreate()
         {
-            var obj = GameObject.Instantiate(_prefab, _parent);
-            return obj;
+            var obj = Object.Instantiate(_poolItem.GameObject, _parent);
+            return obj.GetComponent<IPoolItem>();
         }
     }
 }

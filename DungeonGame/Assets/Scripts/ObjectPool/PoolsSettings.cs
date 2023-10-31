@@ -1,23 +1,23 @@
+using ObjectPool;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public class PoolsSettings
 {
-    [SerializeField] private string _objectType;
     [SerializeField] private int _size;
-	[SerializeField] private GameObject _prefab;
+    [SerializeField] private GameObject _gameObject;
+    private IPoolItem _poolItem;
     public int Size => _size;
-	public GameObject Prefab => _prefab;
-
-	public Type ObjectType
-	{
-		get 
-		{
-			return Type.GetType(_objectType);
+	public IPoolItem PoolItem
+    {
+        get
+        {
+            if (!_gameObject.TryGetComponent<IPoolItem>(out _poolItem))
+                Debug.LogError($"{_gameObject.name} must be able to convert to IPoolItem");   
+            return _poolItem;
         }
-	}
+    }
 
 }
+    
