@@ -10,11 +10,11 @@ namespace GameBoard
 
         public GameObject Hero => _hero;
 
-        public static UnityAction<Cell> OnCellClick;
+        public static UnityAction<Cell> CellClicked;
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnCellClick?.Invoke(this);
+            CellClicked?.Invoke(this);
         }
 
         public void SetHero(GameObject hero)

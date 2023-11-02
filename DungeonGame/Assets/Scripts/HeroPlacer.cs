@@ -9,12 +9,12 @@ namespace GameBoard
 
         private void OnEnable()
         {
-            Cell.OnCellClick += PlaceHero;
+            Cell.CellClicked += PlaceHero;
         }
 
         private void OnDisable()
         {
-            Cell.OnCellClick -= PlaceHero;
+            Cell.CellClicked -= PlaceHero;
         }
 
         private void PlaceHero(Cell cell)

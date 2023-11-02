@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1902374994046709341}
   - component: {fileID: 1902374994046709330}
   - component: {fileID: 3262491251930569669}
-  m_Layer: 0
+  - component: {fileID: -3075230638848508647}
+  m_Layer: 7
   m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,3 +98,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9b25d4b45d53847b627a213fbd3954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider2D: {fileID: -3075230638848508647}
+  _energyUnits: 2
+  _lifeTime: 5
+--- !u!61 &-3075230638848508647
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902374994046709331}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5625, y: 1.5}
+    newSize: {x: 0.5625, y: 1.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5625, y: 1.5}
+  m_EdgeRadius: 0
