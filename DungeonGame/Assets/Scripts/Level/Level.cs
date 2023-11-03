@@ -10,8 +10,10 @@ namespace LevelLogic
 
         private static Level _instance;
 
-        private LevelStateMachine _currentStateMachine;
         public static Level Instance => _instance;
+
+
+        private LevelStateMachine _currentStateMachine;
 
         public LevelStateMachine CurrentStateMachine => _currentStateMachine;
 
@@ -21,18 +23,23 @@ namespace LevelLogic
             {
                 _contextSceneName = SceneManager.GetActiveScene().name;
             }
-            else if(SceneManager.GetActiveScene().name != _contextSceneName)
+            else if (SceneManager.GetActiveScene().name != _contextSceneName)
             {
                 Debug.LogError($"Component Level cant's exist out of scene {_contextSceneName}");
                 return;
             }
-            if(_instance != null)
+            if (_instance != null)
             {
                 Debug.LogError("Component Level already exist in current scene");
                 return;
             }
             _instance = this;
             _currentStateMachine ??= GetComponent<LevelStateMachine>();
+        }
+
+        public void StartMainGame()
+        {
+            _currentStateMachine.ChangeState(LevelState.MainGameState);
         }
     }
 }

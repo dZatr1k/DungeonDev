@@ -6,6 +6,11 @@ namespace LevelLogic
 {
     public class UnitSelectState : LevelStateBase
     {
+        public override bool Condition()
+        {
+            return true;
+        }
+
         public override void Enter()
         {
         }

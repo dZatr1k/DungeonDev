@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using LevelLogic;
+using Units.Heroes;
+using TMPro;
 
 namespace Card
 {
@@ -10,6 +11,13 @@ namespace Card
         public static event Action<Card> OnClick;
         
         [SerializeField] private int _id;
+        [SerializeField] private Hero _hero;
+        [SerializeField] private TextMeshPro _text;
+
+        private void Start()
+        {
+            //_text.text = _hero.Cost.ToString();
+        }
 
         public int ID
         {

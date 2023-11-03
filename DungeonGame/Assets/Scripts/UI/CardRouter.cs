@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using LevelLogic;
 
 namespace Card
 {
@@ -9,69 +10,45 @@ namespace Card
         [SerializeField] private MainCardsPanel _mainPanel;
         [SerializeField] private CardsListPanel _listPanel;
 
+        private ICardRouterBehaviour _behaviour;
+
+        public float MoveTime => _moveTime;
+        public MainCardsPanel MainPanel => _mainPanel;
+        public CardsListPanel ListPanel => _listPanel;
+
         private void OnEnable()
         {
+            Level.Instance.CurrentStateMachine.OnStateChanged += ChangeCardBehaviour;
             Card.OnClick += OnCardClick;
         }
 
         private void OnDisable()
         {
+            Level.Instance.CurrentStateMachine.OnStateChanged += ChangeCardBehaviour;
             Card.OnClick -= OnCardClick;
+        }
+
+        private void ChangeCardBehaviour(LevelState state)
+        {
+            switch (state)
+            {
+                case LevelState.UnitSelectState:
+                    _behaviour = new PreGameCardRouterBehaviour();
+                    break;
+                case LevelState.MainGameState:
+                    _behaviour = new MainGameCardRouterBehaviour();
+                    break;
+            }
         }
 
         private void OnCardClick(Card card)
         {
-            if (_mainPanel.IsPlacedHere(card))
-            {
-                var whereCardPlaced = _mainPanel.GetWherePlaced(card);
-                var targetCardPlace = _listPanel.GetPlaceBy(card.ID);
-                Vector3 targetPosition = _listPanel.GetPositionBy(card.ID);
-                ChangeCardPlace(card, targetCardPlace, whereCardPlaced, targetPosition);
-
-                CheckMainPanelGaps();
-            }
-            else
-            {
-                if (_mainPanel.IsAnyFree())
-                {
-                    var freeCardPlace = _mainPanel.GetFreeCardPlace();
-                    var currentCardPlace = _listPanel.GetPlaceBy(card.ID);
-                    Vector3 targetPosition = freeCardPlace.GetComponent<RectTransform>().position;
-                    ChangeCardPlace(card, freeCardPlace, currentCardPlace, targetPosition);
-                }
-            }
+            _behaviour.OnClick(this, card);
         }
 
-        private void ChangeCardPlace(Card card, CardPlace to, CardPlace from, Vector3 targetPosition)
+        public bool IsAllCardPlacesCorrupted()
         {
-            to.Place(card);
-            from.Free();
-
-            card.transform.SetParent(to.transform);
-            MoveCard(card, targetPosition);
-        }
-
-        private void CheckMainPanelGaps()
-        {
-            if (_mainPanel.HasGaps())
-                FixMainPanelGaps();
-        }
-
-        private void FixMainPanelGaps()
-        {
-            do
-            {
-                var freeCardPlace = _mainPanel.GetFreeCardPlace();
-                var gap = _mainPanel.GetGap();
-                Vector3 targetPosition = freeCardPlace.GetComponent<RectTransform>().position;
-                ChangeCardPlace(gap.Placed, freeCardPlace, gap, targetPosition);
-            }
-            while (_mainPanel.HasGaps());
-        }
-
-        private void MoveCard(Card card, Vector3 targetPosition)
-        {
-            card.GetComponent<RectTransform>().DOMove(targetPosition, _moveTime);
+            return _mainPanel.IsFull();
         }
     }
 }

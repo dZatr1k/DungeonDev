@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -1204,9 +1204,9 @@ TextureImporter:
       TilesVariant2_31: -180800667
       TilesVariant2_18: 104347665
       TilesVariant2_22: -2129165623
-      TilesVariant2_27: 2029666337
-      TilesVariant2_3: 778107451
       TilesVariant2_38: 1603764716
+      TilesVariant2_3: 778107451
+      TilesVariant2_27: 2029666337
       TilesVariant2_46: 508261020
       TilesVariant2_11: -1720819762
       TilesVariant2_25: 680109807
