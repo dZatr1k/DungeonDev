@@ -1,12 +1,14 @@
 using UnityEngine;
 using LevelLogic;
+using Units.Heroes;
 
 namespace GameBoard
 {
     public class HeroPlacer : MonoBehaviour
     {
         [SerializeField] private GameObject _heroParent;
-        [SerializeField] private GameObject _heroToPlace;
+        
+        private Hero _heroToPlace = null;
 
         private bool _isLocked = true;
 
@@ -26,10 +28,12 @@ namespace GameBoard
         {
             if (_isLocked)
                 return;
-            if (cell.Hero == null && _heroToPlace != null)
+            if (cell.IsCorrupted == false && IsSelected())
             {
-                GameObject hero = Instantiate(_heroToPlace, cell.SpawnPoint.transform.position, 
-                    Quaternion.identity, _heroParent.transform);
+                Hero hero = Instantiate(_heroToPlace.gameObject, 
+                    cell.SpawnPoint.transform.position, 
+                    Quaternion.identity, _heroParent.transform)
+                    .GetComponent<Hero>();
                 cell.SetHero(hero);
             }
         }
@@ -42,6 +46,11 @@ namespace GameBoard
         public bool IsSelected()
         {
             return _heroToPlace != null;
+        }
+
+        public void SetHeroToPlace(Hero hero)
+        {
+            _heroToPlace = hero;
         }
 
     }

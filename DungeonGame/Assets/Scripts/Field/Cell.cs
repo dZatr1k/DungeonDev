@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using Units.Heroes;
 
 namespace GameBoard
 {
@@ -46,11 +47,13 @@ namespace GameBoard
             }
         }
 
-        private GameObject _hero;
+        private Hero _hero;
+
+        public bool IsCorrupted => _hero != null;
 
         public SpriteRenderer Renderer => _renderer;
 
-        public GameObject Hero => _hero;
+        public Hero Hero => _hero;
         public GameObject SpawnPoint => _spawnPoint;
 
         public static UnityAction<Cell> OnCellClick;
@@ -65,7 +68,7 @@ namespace GameBoard
             OnCellClick?.Invoke(this);
         }
 
-        public void SetHero(GameObject hero)
+        public void SetHero(Hero hero)
         {
             _hero = hero;
         }

@@ -7,16 +7,16 @@ namespace LevelLogic
 {
     public class LevelMainGameState : LevelStateBase
     {
-        private CardRouter _router;
+        private readonly MainCardsPanel _mainPanel;
 
-        public void SerRouter(CardRouter router)
+        public LevelMainGameState(MainCardsPanel mainPanel)
         {
-            _router = router;
+            _mainPanel = mainPanel;
         }
 
         public override bool Condition()
         {
-            return _router == null ? true : _router.IsAllCardPlacesCorrupted();
+            return _mainPanel == null ? true : _mainPanel.IsFull();
         }
 
         public override void Enter()

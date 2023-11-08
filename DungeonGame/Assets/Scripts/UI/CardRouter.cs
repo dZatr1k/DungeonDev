@@ -1,20 +1,23 @@
 using UnityEngine;
 using DG.Tweening;
 using LevelLogic;
+using GameBoard;
 
 namespace Card
 {
     public class CardRouter : MonoBehaviour
     {
-        [SerializeField] private float _moveTime;
+        [Header("Panels config")]
         [SerializeField] private MainCardsPanel _mainPanel;
         [SerializeField] private CardsListPanel _listPanel;
 
-        private ICardRouterBehaviour _behaviour;
+        [Header("Heroes config")]
+        [SerializeField] private HeroPlacer _heroPlacer;
+        
+        [Header("CardSwapper config")]
+        [SerializeField] private float _moveBetweenPanelsTime;
 
-        public float MoveTime => _moveTime;
-        public MainCardsPanel MainPanel => _mainPanel;
-        public CardsListPanel ListPanel => _listPanel;
+        private ICardBehaviour _behaviour;
 
         private void OnEnable()
         {
@@ -33,22 +36,17 @@ namespace Card
             switch (state)
             {
                 case LevelState.UnitSelectState:
-                    _behaviour = new PreGameCardRouterBehaviour();
+                    _behaviour = new CardSwapper(_mainPanel, _listPanel, _moveBetweenPanelsTime);
                     break;
                 case LevelState.MainGameState:
-                    _behaviour = new MainGameCardRouterBehaviour();
+                    _behaviour = new CardSelector(_heroPlacer);
                     break;
             }
         }
 
         private void OnCardClick(Card card)
         {
-            _behaviour.OnClick(this, card);
-        }
-
-        public bool IsAllCardPlacesCorrupted()
-        {
-            return _mainPanel.IsFull();
+            _behaviour.OnClick(card);
         }
     }
 }

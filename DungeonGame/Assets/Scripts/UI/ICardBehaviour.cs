@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Card
 {
-    public interface ICardRouterBehaviour
+    public interface ICardBehaviour
     {
-        void OnClick(CardRouter ctx, Card card);
+        void OnClick(Card card);
     }
 }

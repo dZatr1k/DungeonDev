@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Units.Heroes;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Card
 {
@@ -12,11 +13,17 @@ namespace Card
         
         [SerializeField] private int _id;
         [SerializeField] private Hero _hero;
-        [SerializeField] private TextMeshPro _text;
+        [SerializeField] private TextMeshProUGUI _text;
+        [SerializeField] private Image _heroView;
+        [SerializeField] private CardView _cardView;
+
+        public CardView CardView => _cardView;
+        public Hero Hero => _hero;
 
         private void Start()
         {
-            //_text.text = _hero.Cost.ToString();
+            _text.text = _hero.Cost.ToString();
+            _heroView.sprite = _hero.GetComponent<SpriteRenderer>().sprite;
         }
 
         public int ID

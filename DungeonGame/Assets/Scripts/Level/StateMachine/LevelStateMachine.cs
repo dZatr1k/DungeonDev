@@ -9,14 +9,11 @@ namespace LevelLogic
     [RequireComponent(typeof(Level))]
     public class LevelStateMachine : MonoBehaviour
     {
-        [SerializeField] private CardRouter _router;
+        [SerializeField] private MainCardsPanel _mainCardPanel;
 
-        public UnityAction<LevelState> OnStateChanged;
         public UnityAction OnGameStarted;
+        public UnityAction<LevelState> OnStateChanged;
         public UnityAction<LevelState> OnFailedToChangeState;
-
-        private readonly LevelStateBase _unitSelectState = new UnitSelectState();
-        private LevelMainGameState _mainGameState = new LevelMainGameState();
 
         private LevelStateBase _currentState;
         private Dictionary<LevelState, LevelStateBase> LevelStateBaseByLevelState;
@@ -24,14 +21,13 @@ namespace LevelLogic
         private void InitializeDictionary()
         {
             LevelStateBaseByLevelState = new Dictionary<LevelState, LevelStateBase>();
-            LevelStateBaseByLevelState.Add(LevelState.UnitSelectState, _unitSelectState);
-            LevelStateBaseByLevelState.Add(LevelState.MainGameState, _mainGameState);
+            LevelStateBaseByLevelState.Add(LevelState.UnitSelectState, new UnitSelectState());
+            LevelStateBaseByLevelState.Add(LevelState.MainGameState, new LevelMainGameState(_mainCardPanel));
         }
 
         private void Start()
         {
             InitializeDictionary();
-            _mainGameState.SerRouter(_router);
             ChangeState(LevelState.UnitSelectState);
         }
 

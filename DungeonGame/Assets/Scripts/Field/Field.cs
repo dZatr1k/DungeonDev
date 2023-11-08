@@ -57,6 +57,27 @@ namespace GameBoard
             toAnimate.Renderer.DOColor(targetColor, time);
         }
 
+        private void AnimateColor(Cell target, float animationTime, Color endColor, Color targetEndColor)
+        {
+            if (_isLocked || _heroPlacer.IsSelected() == false)
+                return;
+
+            var row = GetRow(target);
+            var line = _lines[target.LineNumber].Cells;
+
+            for (int i = 0; i < row.Length; i++)
+            {
+                AnimateCell(row[i], endColor, animationTime);
+            }
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                AnimateCell(line[i], endColor, animationTime);
+            }
+
+            AnimateCell(target, endColor, animationTime);
+        }
+
         public void Relock()
         {
             _isLocked = !_isLocked;
@@ -64,44 +85,12 @@ namespace GameBoard
 
         public void Fog(Cell target)
         {
-            if (_isLocked && _heroPlacer.IsSelected())
-                return;
-
-            var row = GetRow(target);
-            var line = _lines[target.LineNumber].Cells;
-
-            for (int i = 0; i < row.Length; i++)
-            {
-                AnimateCell(row[i], _fogColor, _fogTime);
-            }
-
-            for (int i = 0; i < line.Length; i++)
-            {
-                AnimateCell(line[i], _fogColor, _fogTime);
-            }
-
-            AnimateCell(target, _targetFogColor, _fogTime);
+            AnimateColor(target, _fogTime, _fogColor, _targetFogColor);
         }
 
         public void Defog(Cell target)
         {
-            if (_isLocked && _heroPlacer.IsSelected())
-                return;
-
-            var row = GetRow(target);
-            var line = _lines[target.LineNumber].Cells;
-
-            for (int i = 0; i < row.Length; i++)
-            {
-                AnimateCell(row[i], Color.white, _defogTime);
-            }
-
-            for (int i = 0; i < line.Length; i++)
-            {
-                AnimateCell(line[i], Color.white, _defogTime);
-            }
-            
-            AnimateCell(target, Color.white, _defogTime);
+            AnimateColor(target, _defogTime, Color.white, Color.white);
         }
     }
 }
