@@ -1,12 +1,41 @@
 using ObjectPool;
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Energy : MonoBehaviour, IPoolItem
+public class Energy : PoolItem, IPointerClickHandler
 {
-    public GameObject GameObject => gameObject;
+    [SerializeField] private Collider2D _collider2D;
+    [SerializeField] private uint _energyUnits = 2;
+    [SerializeField] private float _lifeTime = 2.5f;
 
-    public void SetDefaultSettings()
+    public override Type ItemType { get => GetType(); }
+    public override GameObject GameObject => gameObject;
+    public uint EnergyUnits => _energyUnits;
+
+    public static event Action<Energy> EnergyCollected;
+
+    private void OnEnable()
     {
-        Debug.Log("Default Settings");
+        StartCoroutine(LifeLoopCoroutine());
+    }
+
+    private IEnumerator LifeLoopCoroutine()
+    {
+        yield return new WaitForSeconds(_lifeTime);
+        ReleaseItem();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        _collider2D.enabled = false;
+        EnergyCollected?.Invoke(this);
+        ReleaseItem();
+    }
+
+    public override void SetDefaultSettings()
+    {
+        _collider2D.enabled = true;
     }
 }

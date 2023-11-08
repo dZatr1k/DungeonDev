@@ -56,7 +56,7 @@ namespace GameBoard
         public Hero Hero => _hero;
         public GameObject SpawnPoint => _spawnPoint;
 
-        public static UnityAction<Cell> OnCellClick;
+        public static UnityAction<Cell> CellClicked;
 
         private void OnValidate()
         {
@@ -65,7 +65,7 @@ namespace GameBoard
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnCellClick?.Invoke(this);
+            CellClicked?.Invoke(this);
         }
 
         public void SetHero(Hero hero)

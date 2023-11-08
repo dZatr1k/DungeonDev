@@ -5,51 +5,50 @@ namespace ObjectPool
 {
     public class CustomUnityPool
     {
-        private ObjectPool<IPoolItem> _pool;
-        private IPoolItem _poolItem;
+        private ObjectPool<PoolItem> _pool;
+        private PoolItem _poolItem;
         private Transform _parent;
         private Transform _parentOfParents;
 
-        public CustomUnityPool(IPoolItem prefab, int maxSize, string parentName, Transform parentOfParents)
+        public CustomUnityPool(PoolItem prefab, int maxSize, string parentName, Transform parentOfParents)
         {
             _poolItem = prefab;
-            _pool = new ObjectPool<IPoolItem>(OnCreate, OnGet, OnRelease, OnDestroy, false, maxSize: maxSize);
+            _pool = new ObjectPool<PoolItem>(OnCreate, OnGet, OnRelease, OnDestroy, false, maxSize: maxSize);
             _parentOfParents = parentOfParents.transform;
             _parent = new GameObject(parentName).transform;
             _parent.parent = _parentOfParents;
         }
 
-        public IPoolItem Get()
+        public PoolItem Get()
         {
             var obj = _pool.Get();
             return obj;
         }
 
-        public void Release(IPoolItem obj)
+        public void Release(PoolItem obj)
         {
             _pool.Release(obj);
         }
 
-        private void OnDestroy(IPoolItem obj)
+        private void OnDestroy(PoolItem obj)
         {
             Object.Destroy(obj.GameObject);
         }
 
-        private void OnRelease(IPoolItem obj)
+        private void OnRelease(PoolItem obj)
         {
             obj.SetDefaultSettings();
             obj.GameObject.SetActive(false);
         }
 
-        private void OnGet(IPoolItem obj)
+        private void OnGet(PoolItem obj)
         {
             obj.GameObject.SetActive(true);
         }
 
-        private IPoolItem OnCreate()
+        private PoolItem OnCreate()
         {
-            var obj = Object.Instantiate(_poolItem.GameObject, _parent);
-            return obj.GetComponent<IPoolItem>();
+            return Object.Instantiate(_poolItem, _parent);
         }
     }
 }
