@@ -10,6 +10,8 @@ public class Energy : PoolItem, IPointerClickHandler
     [SerializeField] private uint _energyUnits = 2;
     [SerializeField] private float _lifeTime = 2.5f;
 
+    private Coroutine _lifeCoroutine;
+
     public override Type ItemType { get => GetType(); }
     public override GameObject GameObject => gameObject;
     public uint EnergyUnits => _energyUnits;
@@ -18,24 +20,29 @@ public class Energy : PoolItem, IPointerClickHandler
 
     private void OnEnable()
     {
-        StartCoroutine(LifeLoopCoroutine());
+        _lifeCoroutine = StartCoroutine(LifeLoopCoroutine());
     }
 
     private IEnumerator LifeLoopCoroutine()
     {
         yield return new WaitForSeconds(_lifeTime);
-        ReleaseItem();
+        Kill();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         _collider2D.enabled = false;
         EnergyCollected?.Invoke(this);
-        ReleaseItem();
+        StopCoroutine(_lifeCoroutine);
     }
 
     public override void SetDefaultSettings()
     {
         _collider2D.enabled = true;
+    }
+
+    public void Kill()
+    {
+        ReleaseItem();
     }
 }

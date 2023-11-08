@@ -20,9 +20,9 @@ namespace Card
             {
                 _lastSelected.CardView.DisableHaze();
                 _heroPlacer.SetHeroToPlace(null);
+                _lastSelected = null;
             }
-
-            if(_lastSelected != card)
+            else if(_lastSelected != card)
             {
                 _lastSelected = card;
                 _heroPlacer.SetHeroToPlace(card.Hero);

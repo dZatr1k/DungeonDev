@@ -1,6 +1,7 @@
 using ObjectPool;
 using System.Collections;
 using UnityEngine;
+using LevelLogic;
 
 public class EnergySpawner : MonoBehaviour
 {
@@ -8,11 +9,26 @@ public class EnergySpawner : MonoBehaviour
     [SerializeField] private Energy _energy;
     [SerializeField] private Transform _firstBorderPoint, _secondBorderPoint;
     [SerializeField] private float _minSpawnTime, _maxSpawnTime;
+    
     private CustomUnityPool _pool;
 
     private void Start()
     {
         _pool = _poolsCatalog.GetPool(_energy);
+    }
+
+    private void OnEnable()
+    {
+        Level.Instance.CurrentStateMachine.OnGameStarted += StartSpawn;
+    }
+
+    private void OnDisable()
+    {
+        Level.Instance.CurrentStateMachine.OnGameStarted -= StartSpawn;
+    }
+
+    public void StartSpawn()
+    {
         StartCoroutine(SpawnEnergyCoroutine());
     }
 

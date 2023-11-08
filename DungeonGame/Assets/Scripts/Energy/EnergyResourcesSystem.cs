@@ -28,7 +28,7 @@ public class EnergyResourcesSystem : MonoBehaviour
         ResourcesChanged?.Invoke(_energyUnits);
     }
 
-    public bool TryDecreaseEnergyResources(uint cost) // after I suppose that here we'll pass as arg special class or interface, which contain cost property 
+    public bool TryDecreaseEnergyResources(uint cost)
     {
         if (cost <= _energyUnits)
         {
