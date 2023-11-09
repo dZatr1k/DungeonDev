@@ -438,9 +438,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolsSettingsPair:
-  - _size: 0
-    _poolItem: {fileID: 0}
+  - _size: 10
+    _poolItem: {fileID: 3262491251930569669, guid: 5d59627f259bd1e429564f0c79679961, type: 3}
   _defaultPoolSize: 7
+--- !u!1 &33248161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 33248162}
+  - component: {fileID: 33248163}
+  m_Layer: 0
+  m_Name: PoolItemReleaser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &33248162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33248161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 420981004}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &33248163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33248161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9be784dd5f52214688fc6b4e8de7df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolCatalog: {fileID: 28404852}
 --- !u!1001 &48566319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -818,7 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_MaxRayIntersections: 0
 --- !u!1001 &136345944
 PrefabInstance:
@@ -2551,6 +2596,7 @@ Transform:
   - {fileID: 1486263276}
   - {fileID: 1996123667}
   - {fileID: 28404851}
+  - {fileID: 33248162}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8550,7 +8596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 443.97992, y: -101.41995}
+  m_AnchoredPosition: {x: 443.97992, y: -101.41992}
   m_SizeDelta: {x: 761.82, y: -417.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1510243378
@@ -8991,7 +9037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 444.78998, y: -103.18997}
+  m_AnchoredPosition: {x: 444.78998, y: -103.18994}
   m_SizeDelta: {x: 830.49, y: -344.22998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1654044078
@@ -12258,6 +12304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2104015256}
+  - component: {fileID: 2104015257}
   m_Layer: 0
   m_Name: EnergyPanel
   m_TagString: Untagged
@@ -12288,6 +12335,19 @@ RectTransform:
   m_AnchoredPosition: {x: -15.000061, y: 11}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2104015257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104015255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c643eef8afe4a4f9453117e51d03bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 255111473}
 --- !u!1 &2109499393
 GameObject:
   m_ObjectHideFlags: 0
