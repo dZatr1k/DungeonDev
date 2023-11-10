@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using LevelLogic;
+using System.Collections;
 
 namespace GameBoard
 {
@@ -30,11 +31,13 @@ namespace GameBoard
         private void OnEnable()
         {
             Level.Instance.CurrentStateMachine.OnGameStarted += Relock;
+            HeroPlacer.OnHeroPlaced += Defog;
         }
 
         private void OnDisable()
         {
             Level.Instance.CurrentStateMachine.OnGameStarted -= Relock;
+            HeroPlacer.OnHeroPlaced -= Defog;
         }
 
         private Cell[] GetRow(Cell target)
@@ -57,6 +60,14 @@ namespace GameBoard
             toAnimate.Renderer.DOColor(targetColor, time);
         }
 
+        private void AnimateCells(Cell[] array, Color endColor, float time)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                AnimateCell(array[i], endColor, time);
+            }
+        }
+
         private void AnimateColor(Cell target, float animationTime, Color endColor, Color targetEndColor)
         {
             if (_isLocked || _heroPlacer.IsSelected() == false)
@@ -65,17 +76,9 @@ namespace GameBoard
             var row = GetRow(target);
             var line = _lines[target.LineNumber].Cells;
 
-            for (int i = 0; i < row.Length; i++)
-            {
-                AnimateCell(row[i], endColor, animationTime);
-            }
-
-            for (int i = 0; i < line.Length; i++)
-            {
-                AnimateCell(line[i], endColor, animationTime);
-            }
-
-            AnimateCell(target, endColor, animationTime);
+            AnimateCells(row, endColor, animationTime);
+            AnimateCells(line, endColor, animationTime);
+            AnimateCell(target, targetEndColor, animationTime);
         }
 
         public void Relock()
@@ -85,7 +88,8 @@ namespace GameBoard
 
         public void Fog(Cell target)
         {
-            AnimateColor(target, _fogTime, _fogColor, _targetFogColor);
+            if (target.Hero == null)
+                AnimateColor(target, _fogTime, _fogColor, _targetFogColor);
         }
 
         public void Defog(Cell target)

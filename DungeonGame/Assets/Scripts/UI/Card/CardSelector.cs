@@ -12,21 +12,42 @@ namespace Card
         public CardSelector(HeroPlacer heroPlacer)
         {
             _heroPlacer = heroPlacer;
+            HeroPlacer.OnHeroPlaced += Deselect;
+        }
+
+        public void Deselect(Cell cell)
+        {
+            OnHeroPlaced();
+        }
+
+        private void OnHeroPlaced()
+        {
+            _lastSelected.CardView.HideBuyHaze();
+            _heroPlacer.ResetHero();
+            _lastSelected = null;
         }
 
         public void OnClick(Card card)
         {
-            if(_lastSelected != null)
+            if(card == _lastSelected)
             {
                 _lastSelected.CardView.DisableHaze();
-                _heroPlacer.SetHeroToPlace(null);
+                _heroPlacer.ResetHero();
                 _lastSelected = null;
             }
-            else if(_lastSelected != card)
+            else
             {
-                _lastSelected = card;
-                _heroPlacer.SetHeroToPlace(card.Hero);
-                card.CardView.EnableHaze();
+                if (_heroPlacer.SetHeroToPlace(card.Hero))
+                {
+                    if(_lastSelected != null)
+                        _lastSelected.CardView.DisableHaze();
+                    _lastSelected = card;
+                    card.CardView.EnableHaze();
+                }
+                else
+                {
+                    card.CardView.PlayError();
+                }
             }
         }
     }

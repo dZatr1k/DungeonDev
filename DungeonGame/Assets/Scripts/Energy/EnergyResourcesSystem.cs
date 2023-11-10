@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Units.Heroes;
 
 public class EnergyResourcesSystem : MonoBehaviour
 {
@@ -28,14 +29,19 @@ public class EnergyResourcesSystem : MonoBehaviour
         ResourcesChanged?.Invoke(_energyUnits);
     }
 
-    public bool TryDecreaseEnergyResources(uint cost)
+    public bool IsAbleToBuy(Hero hero)
     {
-        if (cost <= _energyUnits)
+        return hero.Cost <= _energyUnits;
+    }
+
+    public void DecreaseEnergyResources(Hero hero)
+    {
+        if (hero.Cost <= _energyUnits)
         {
-            _energyUnits -= cost;
+            _energyUnits -= hero.Cost;
             ResourcesChanged?.Invoke(_energyUnits);
-            return true;
+            return;
         }
-        return false;
+
     }
 }

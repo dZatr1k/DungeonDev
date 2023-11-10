@@ -102,6 +102,7 @@ MonoBehaviour:
   _attackCooldown: 0
   _damage: 0
   _cost: 50
+  _reloadAfterBuyTime: 5
 --- !u!61 &4959966431773686071
 BoxCollider2D:
   m_ObjectHideFlags: 0
