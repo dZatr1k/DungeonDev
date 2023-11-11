@@ -6,6 +6,7 @@ namespace Waves
     public class WavesSystem : MonoBehaviour
     {
         [SerializeField] private Wave[] _waves;
+        [SerializeField] private EnemiesSpawner _enemySpawner;
 
         private void Start()
         {
@@ -16,7 +17,8 @@ namespace Waves
         {
             foreach (var wave in _waves)
             {
-                StartCoroutine(wave.StartWaveCoroutine());
+                Debug.Log(wave.name + " Started");
+                StartCoroutine(wave.StartWaveCoroutine(_enemySpawner));
                 yield return new WaitForSeconds(wave.WaveDurationWithoutFinalAttack + wave.FinalAttackDuration);
             }
         }

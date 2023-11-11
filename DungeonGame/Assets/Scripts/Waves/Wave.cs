@@ -25,16 +25,18 @@ namespace Waves
 
         public static event Action StartFinalSubWave;
 
-        public IEnumerator StartWaveCoroutine()
+        public IEnumerator StartWaveCoroutine(EnemiesSpawner enemySpawner)
         {
             foreach (var subWave in _subWaves)
             {
-                StartCoroutine(subWave.StartSubWaveCoroutine());
+                Debug.Log(subWave.name + " started");
+                subWave.StartSubWave(enemySpawner);
                 yield return new WaitForSeconds(subWave.SubWaveDuration);
             }
 
-            StartFinalSubWave.Invoke();
-            StartCoroutine(_finalSubWave.StartSubWaveCoroutine());
+            StartFinalSubWave?.Invoke();
+            Debug.Log(_finalSubWave.name + " started");
+            _finalSubWave.StartSubWave(enemySpawner);
             yield return new WaitForSeconds(_finalSubWave.SubWaveDuration);
         }
     }

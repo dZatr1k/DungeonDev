@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using ObjectPool;
+using System;
 using UnityEngine;
 
 namespace Units
 {
-    public abstract class Unit<T> : MonoBehaviour
+    public abstract class Unit<T> : PoolItem
     {
         [SerializeField] protected int _health;
         [SerializeField] protected float _attackCooldown;
@@ -16,6 +16,9 @@ namespace Units
         public int Damage => _damage;
 
         public int Cost => _cost;
+
+        public override Type ItemType { get => GetType(); }
+        public override GameObject GameObject => gameObject;
 
         public virtual void Attack(T enemy)
         {
