@@ -38,7 +38,8 @@ namespace Waves
                 counter += Time.deltaTime;
                 if (_isSubWaveEnded)
                     yield break;
-                yield return null;
+                yield return new WaitForSeconds(0.5f);
+                // check flag _isSubWaveEnded every 0.5 second
             }
 
             enemySpawner.SpawnedEnemyDied -= MemberDie;
