@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,30 +13,25 @@ namespace Waves
             get
             {
                 uint waveDuration = 0;
-                for (int i = 0; i < _subWaves.Length - 1; i++)
-                {
-                    waveDuration += _subWaves[i].SubWaveDuration;
-                }
+                foreach (var subWave in _subWaves)
+                    waveDuration += subWave.SubWaveDuration;
                 return waveDuration;
             }
         }
         public uint FinalAttackDuration => _finalSubWave.SubWaveDuration;
+        public uint TotalWaveDuration => WaveDurationWithoutFinalAttack + FinalAttackDuration;
 
-        public static event Action StartFinalSubWave;
-
-        public IEnumerator StartWaveCoroutine(EnemiesSpawner enemySpawner)
+        public IEnumerator StartWaveCoroutine(EnemySpawner enemySpawner)
         {
             foreach (var subWave in _subWaves)
             {
                 Debug.Log(subWave.name + " started");
-                subWave.StartSubWave(enemySpawner);
-                yield return new WaitForSeconds(subWave.SubWaveDuration);
+                yield return StartCoroutine(subWave.StartSubWaveCoroutine(enemySpawner));
             }
 
-            StartFinalSubWave?.Invoke();
             Debug.Log(_finalSubWave.name + " started");
-            _finalSubWave.StartSubWave(enemySpawner);
-            yield return new WaitForSeconds(_finalSubWave.SubWaveDuration);
+            yield return StartCoroutine(_finalSubWave.StartSubWaveCoroutine(enemySpawner)); 
         }
+
     }
 }

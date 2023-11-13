@@ -6,7 +6,22 @@ namespace Waves
     public class WavesSystem : MonoBehaviour
     {
         [SerializeField] private Wave[] _waves;
-        [SerializeField] private EnemiesSpawner _enemySpawner;
+        [SerializeField] private EnemySpawner _enemySpawner;
+
+        public Wave[] Waves => _waves;
+
+        public uint LevelDuration
+        {
+            get
+            {
+                uint levelDuration = 0;
+                foreach (var waves in _waves)
+                {
+                    levelDuration += waves.TotalWaveDuration;
+                }
+                return levelDuration;
+            }
+        }
 
         private void Start()
         {
@@ -17,10 +32,10 @@ namespace Waves
         {
             foreach (var wave in _waves)
             {
-                Debug.Log(wave.name + " Started");
-                StartCoroutine(wave.StartWaveCoroutine(_enemySpawner));
-                yield return new WaitForSeconds(wave.WaveDurationWithoutFinalAttack + wave.FinalAttackDuration);
+                Debug.Log($"{wave.name} started");
+                yield return StartCoroutine(wave.StartWaveCoroutine(_enemySpawner));
             }
+            Debug.Log("LEVEL END");
         }
     }
 }
