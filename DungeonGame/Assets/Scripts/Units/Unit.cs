@@ -1,23 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+using ObjectPool;
+using System;
 using UnityEngine;
 
 namespace Units
 {
-    public abstract class Unit<TOpponent> : MonoBehaviour
+    public abstract class Unit<T> : PoolItem
     {
         [SerializeField] protected int _health;
         [SerializeField] protected float _attackCooldown;
         [SerializeField] protected int _damage;
-        [SerializeField] protected uint _cost;
+        [SerializeField] protected int _cost;
 
         public int Health => _health;
         public float AttackCooldown => _attackCooldown;
         public int Damage => _damage;
 
-        public uint Cost => _cost;
+        public int Cost => _cost;
 
-        public virtual void Attack(TOpponent enemy)
+        public override Type ItemType { get => GetType(); }
+        public override GameObject GameObject => gameObject;
+
+        public virtual void Attack(T enemy)
         {
             throw new System.NotImplementedException();
         }
