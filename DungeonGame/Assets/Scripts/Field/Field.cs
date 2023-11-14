@@ -7,6 +7,7 @@ namespace GameBoard
 {
     public class Field : MonoBehaviour
     {
+        [SerializeField] private Transform _endPoint;
         [SerializeField] private Line[] _lines;
         [SerializeField] private Color _fogColor;
         [SerializeField] private Color _targetFogColor;
@@ -15,6 +16,8 @@ namespace GameBoard
         [SerializeField] private HeroPlacer _heroPlacer;
 
         private bool _isLocked = true;
+
+        public Transform EndPoint => _endPoint;
 
         private void OnValidate()
         {

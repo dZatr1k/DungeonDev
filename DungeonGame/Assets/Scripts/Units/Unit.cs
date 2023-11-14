@@ -1,28 +1,93 @@
 using ObjectPool;
 using System;
 using UnityEngine;
+using System.Collections;
 
 namespace Units
 {
-    public abstract class Unit<T> : PoolItem
+    public abstract class Unit : PoolItem
     {
+        [SerializeField] protected ContactFilter2D _contactFilter;
+        [SerializeField] protected BoxCollider2D _observeArea;
         [SerializeField] protected int _health;
         [SerializeField] protected float _attackCooldown;
-        [SerializeField] protected int _damage;
-        [SerializeField] protected int _cost;
+        [SerializeField] protected Weapon _weapon;
+        [SerializeField] protected uint _cost;
 
+        private IAttackBehaviour _attackBehaviour;
+        private bool _isReloading = false;
+
+        public Action<Unit> OnUnitDie;
         public int Health => _health;
         public float AttackCooldown => _attackCooldown;
-        public int Damage => _damage;
 
-        public int Cost => _cost;
+        public uint Cost => _cost;
 
         public override Type ItemType { get => GetType(); }
         public override GameObject GameObject => gameObject;
 
-        public virtual void Attack(T enemy)
+        private void Start()
         {
-            throw new System.NotImplementedException();
+            switch (_weapon.AttackType)
+            {
+                case WeaponAttackType.Throw:
+                    _attackBehaviour = new RenewableAttack();
+                    break;
+                case WeaponAttackType.Hand:
+                    _attackBehaviour = new NonRenewableAttack();
+                    break;
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            
+        }
+
+        private void FixedUpdate()
+        {
+            CheckObserveArea();
+        }
+
+        private void CheckObserveArea()
+        {
+            if (_isReloading)
+                return;
+
+            Collider2D[] hits = new Collider2D[3];
+            _observeArea.OverlapCollider(_contactFilter, hits);
+
+            foreach (var collision in hits)
+            {
+                if (collision == null)
+                    continue;
+                if (collision.gameObject.TryGetComponent(out Unit unit))
+                {
+                    Debug.Log("attack");
+                    Attack(unit);
+                    StartCoroutine(ReloadCoroutine());
+                    break;
+                }
+            }
+        }
+
+        private IEnumerator ReloadCoroutine()
+        {
+            _isReloading = true;
+            yield return new WaitForSeconds(RandomExtensions.GetNumberInEpsilonAmbit(_attackCooldown));
+            _isReloading = false;
+            Debug.Log("reload" + GetType());
+        }
+
+        public virtual void Die()
+        {
+            ReleaseItem();
+            OnUnitDie?.Invoke(this);
+        }
+
+        public virtual void Attack(Unit enemy)
+        {
+            _attackBehaviour?.Attack(this, enemy, _weapon);
         }
 
         public virtual bool IsAlive()
@@ -32,7 +97,11 @@ namespace Units
 
         public virtual void TakeDamage(int damage)
         {
-            throw new System.NotImplementedException();
+            _health = damage >= _health ? 0 : _health - damage;
+            if (IsAlive() == false)
+            {
+                Die();
+            }
         }
     }
 }

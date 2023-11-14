@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using LevelLogic;
 
 namespace Waves
 {
@@ -23,7 +24,17 @@ namespace Waves
             }
         }
 
-        private void Start()
+        private void OnEnable()
+        {
+            Level.Instance.CurrentStateMachine.OnGameStarted += StartSystem;
+        }
+
+        private void OnDisable()
+        {
+            Level.Instance.CurrentStateMachine.OnGameStarted -= StartSystem;
+        }
+
+        private void StartSystem()
         {
             StartCoroutine(StartWavesCoroutine());
         }

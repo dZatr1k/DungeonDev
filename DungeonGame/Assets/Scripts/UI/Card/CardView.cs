@@ -25,6 +25,7 @@ namespace Card
             yield return tween.WaitForCompletion();
             _haze.enabled = false;
             _hazeToAnimate.enabled = false;
+            _cardToAnimate.Activate();
         }
 
         public void HideBuyHaze()

@@ -23,6 +23,7 @@ namespace Card
         private void OnHeroPlaced()
         {
             _lastSelected.CardView.HideBuyHaze();
+            _lastSelected.Deactivate();
             _heroPlacer.ResetHero();
             _lastSelected = null;
         }
@@ -37,7 +38,7 @@ namespace Card
             }
             else
             {
-                if (_heroPlacer.SetHeroToPlace(card.Hero))
+                if (_heroPlacer.SetHeroToPlace(card))
                 {
                     if(_lastSelected != null)
                         _lastSelected.CardView.DisableHaze();

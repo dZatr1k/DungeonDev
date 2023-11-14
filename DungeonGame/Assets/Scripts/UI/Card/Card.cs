@@ -41,6 +41,16 @@ namespace Card
             }
         }
 
+        public void Activate()
+        {
+            GetComponent<GraphicRaycaster>().enabled = true;
+        }
+
+        public void Deactivate()
+        {
+            GetComponent<GraphicRaycaster>().enabled = false;
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             OnClick?.Invoke(this);

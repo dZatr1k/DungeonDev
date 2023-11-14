@@ -8,14 +8,13 @@ namespace ObjectPool
     {
         [SerializeField] private List<PoolsSettings> _poolsSettingsPair;
         [SerializeField] private int _defaultPoolSize;
+        [SerializeField] private GameObject _parent;
 
         private readonly Dictionary<Type, CustomUnityPool> _pools = new Dictionary<Type, CustomUnityPool>();
-        private GameObject _parent;
 
         private void Awake()
         {
             // сделал тут так как в методе Start EnergySpawner уже PoolsCatalog должен быть настроен
-            _parent = new GameObject("Pools");
             for (int i = 0; i < _poolsSettingsPair.Count; i++)
             {
                 var poolItem = _poolsSettingsPair[i].PoolItem;

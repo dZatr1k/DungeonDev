@@ -1,9 +1,11 @@
 using System;
+using UnityEngine;
 using Units.Heroes;
 
 namespace Units.Enemies
 {
-    public class Enemy : Unit<Hero>
+    [RequireComponent(typeof(EnemyMover))]
+    public class Enemy : Unit
     {
         public event Action<Enemy> EnemyDied;
 

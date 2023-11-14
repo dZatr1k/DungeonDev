@@ -2,11 +2,13 @@ using System;
 using UnityEngine;
 using LevelLogic;
 using Units.Heroes;
+using ObjectPool;
 
 namespace GameBoard
 {
     public class HeroPlacer : MonoBehaviour
     {
+        [SerializeField] private PoolsCatalog _poolsCatalog;
         [SerializeField] private GameObject _heroParent;
         [SerializeField] private EnergyResourcesSystem _energyResourcesSystem;
         
@@ -34,10 +36,9 @@ namespace GameBoard
                 return;
             if (cell.IsCorrupted == false && IsSelected())
             {
-                Hero hero = Instantiate(_heroToPlace.gameObject, 
-                    cell.SpawnPoint.transform.position, 
-                    Quaternion.identity, _heroParent.transform)
-                    .GetComponent<Hero>();
+                Hero hero = _poolsCatalog.GetPool(_heroToPlace).Get().GetComponent<Hero>();
+                hero.transform.position = cell.SpawnPoint.transform.position;
+                hero.ChangeObserveArea();
                 cell.SetHero(hero);
                 OnHeroPlaced?.Invoke(cell);
             }
@@ -58,13 +59,13 @@ namespace GameBoard
             _heroToPlace = null;
         }
 
-        public bool SetHeroToPlace(Hero hero)
+        public bool SetHeroToPlace(Card.Card card)
         {
-            if(hero != null)
+            if(card.Hero != null)
             {
-                if (_energyResourcesSystem.IsAbleToBuy(hero))
+                if (_energyResourcesSystem.IsAbleToBuy(card.Hero))
                 {
-                    _heroToPlace = hero;
+                    _heroToPlace = card.Hero;
                     return true;
                 }
             }

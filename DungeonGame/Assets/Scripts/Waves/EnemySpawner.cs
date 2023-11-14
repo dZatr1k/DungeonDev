@@ -18,7 +18,7 @@ namespace Waves
         public void SpawnEnemyOnRandomCell(Enemy enemy, int index)
         {
             var obj = _poolsCatalog.GetPool(enemy).Get();
-            obj.transform.position = _spawnCells[index % _spawnCells.Length].transform.position;
+            obj.transform.position = _spawnCells[index % _spawnCells.Length].SpawnPoint.transform.position;
             obj.GetComponent<Enemy>().EnemyDied += EnemyDie;
         }
 
