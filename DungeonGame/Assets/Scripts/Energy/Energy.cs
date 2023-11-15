@@ -26,6 +26,7 @@ public class Energy : PoolItem, IPointerClickHandler
 
     private void OnEnable()
     {
+        GetComponent<SpriteRenderer>().color = Color.white;
         _energyAnimator = FindObjectOfType<EnergyAnimator>();
         _lifeCoroutine = StartCoroutine(LifeLoopCoroutine());
     }

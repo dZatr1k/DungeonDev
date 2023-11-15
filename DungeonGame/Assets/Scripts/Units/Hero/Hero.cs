@@ -14,6 +14,9 @@ namespace Units.Heroes
         
         public void ChangeObserveArea()
         {
+            if (_weapon == null)
+                return;
+
             var field = FindObjectOfType<Field>();
             var delta = field.EndPoint.position - transform.position;
             _observeArea.size = new Vector2(delta.x, _observeArea.size.y);

@@ -71,10 +71,12 @@ namespace GameBoard
         public void SetHero(Hero hero)
         {
             _hero = hero;
+            _hero.OnUnitDie += RemoveHero;
         }
 
         private void RemoveHero()
         {
+            _hero.OnUnitDie -= RemoveHero;
             _hero = null;
         }
 

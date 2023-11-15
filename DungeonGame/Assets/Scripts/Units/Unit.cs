@@ -17,7 +17,7 @@ namespace Units
         private IAttackBehaviour _attackBehaviour;
         private bool _isReloading = false;
 
-        public Action<Unit> OnUnitDie;
+        public Action OnUnitDie;
         public int Health => _health;
         public float AttackCooldown => _attackCooldown;
 
@@ -28,20 +28,18 @@ namespace Units
 
         private void Start()
         {
+            if (_weapon == null)
+                return;
             switch (_weapon.AttackType)
             {
                 case WeaponAttackType.Throw:
+                case WeaponAttackType.DoubleThrow:
                     _attackBehaviour = new RenewableAttack();
                     break;
                 case WeaponAttackType.Hand:
                     _attackBehaviour = new NonRenewableAttack();
                     break;
             }
-        }
-
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            
         }
 
         private void FixedUpdate()
@@ -51,7 +49,7 @@ namespace Units
 
         private void CheckObserveArea()
         {
-            if (_isReloading)
+            if (_weapon == null || _isReloading)
                 return;
 
             Collider2D[] hits = new Collider2D[3];
@@ -82,7 +80,7 @@ namespace Units
         public virtual void Die()
         {
             ReleaseItem();
-            OnUnitDie?.Invoke(this);
+            OnUnitDie?.Invoke();
         }
 
         public virtual void Attack(Unit enemy)
