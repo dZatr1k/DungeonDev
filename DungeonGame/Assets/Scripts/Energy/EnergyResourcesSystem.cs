@@ -6,7 +6,7 @@ public class EnergyResourcesSystem : MonoBehaviour
 {
     [SerializeField] private uint _energyUnits;
 
-    public static event Action<uint> ResourcesChanged;
+    public static event Action<uint> OnResourcesChanged;
 
     private void OnEnable()
     {
@@ -20,13 +20,13 @@ public class EnergyResourcesSystem : MonoBehaviour
 
     private void Start()
     {
-        ResourcesChanged?.Invoke(_energyUnits);
+        OnResourcesChanged?.Invoke(_energyUnits);
     }
 
     private void IncreaseEnergyResources(Energy energy)
     {
         _energyUnits += energy.EnergyUnits;
-        ResourcesChanged?.Invoke(_energyUnits);
+        OnResourcesChanged?.Invoke(_energyUnits);
     }
 
     public bool IsAbleToBuy(Hero hero)
@@ -39,7 +39,7 @@ public class EnergyResourcesSystem : MonoBehaviour
         if (hero.Cost <= _energyUnits)
         {
             _energyUnits -= hero.Cost;
-            ResourcesChanged?.Invoke(_energyUnits);
+            OnResourcesChanged?.Invoke(_energyUnits);
             return;
         }
 

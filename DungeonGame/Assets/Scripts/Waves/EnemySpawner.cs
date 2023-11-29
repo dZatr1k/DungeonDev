@@ -1,6 +1,7 @@
 using GameBoard;
 using ObjectPool;
 using System;
+using Units;
 using Units.Enemies;
 using UnityEngine;
 
@@ -13,18 +14,19 @@ namespace Waves
         [SerializeField] private Cell[] _spawnCells;
         public Cell[] SpawnCells => _spawnCells;
 
-        public event Action SpawnedEnemyDied;
+        public static event Action SpawnedEnemyDied;
 
         public void SpawnEnemyOnRandomCell(Enemy enemy, int index)
         {
             var obj = _poolsCatalog.GetPool(enemy).Get();
             obj.transform.position = _spawnCells[index % _spawnCells.Length].SpawnPoint.transform.position;
-            obj.GetComponent<Enemy>().EnemyDied += EnemyDie;
+            obj.GetComponent<Enemy>().OnUnitDied += EnemyDie;
         }
 
-        private void EnemyDie(Enemy enemy)
+        private void EnemyDie(Unit enemy)
         {
-            enemy.EnemyDied -= EnemyDie;
+            enemy.OnUnitDied -= EnemyDie;
+            Debug.Log("enemy Died");
             SpawnedEnemyDied?.Invoke();
         }
     }

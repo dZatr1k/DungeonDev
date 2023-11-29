@@ -7,12 +7,12 @@ public class EnergyResourcesPresenter : MonoBehaviour
 
     private void OnEnable()
     {
-        EnergyResourcesSystem.ResourcesChanged += UpdatePresenter;
+        EnergyResourcesSystem.OnResourcesChanged += UpdatePresenter;
     }
 
     private void OnDisable()
     {
-        EnergyResourcesSystem.ResourcesChanged -= UpdatePresenter;
+        EnergyResourcesSystem.OnResourcesChanged -= UpdatePresenter;
     }
 
     private void UpdatePresenter(uint energyUnits)

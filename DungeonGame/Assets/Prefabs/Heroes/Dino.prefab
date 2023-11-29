@@ -173,7 +173,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   _observeArea: {fileID: 1265248937906040122}
-  _health: 10
+  _health: 15
   _attackCooldown: 3
   _weapon: {fileID: 1431040656206098242, guid: a192fb26df42e1b4fa1ce7763888e1a9, type: 3}
   _cost: 50

@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: -5163705887973236683}
-  _speed: 1
+  _speed: 0.75
 --- !u!61 &7198921653672733419
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   _observeArea: {fileID: 6876534328098553569}
-  _health: 20
+  _health: 15
   _attackCooldown: 3
   _weapon: {fileID: 5124092920168573980, guid: 72940ef0a4eca2f48ae903fba8e74264, type: 3}
   _cost: 0

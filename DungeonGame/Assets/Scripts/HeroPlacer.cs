@@ -20,13 +20,13 @@ namespace GameBoard
 
         private void OnEnable()
         {
-            Cell.CellClicked += PlaceHero;
+            Cell.OnCellClicked += PlaceHero;
             Level.Instance.CurrentStateMachine.OnGameStarted += Relock;
         }
 
         private void OnDisable()
         {
-            Cell.CellClicked -= PlaceHero;
+            Cell.OnCellClicked -= PlaceHero;
             Level.Instance.CurrentStateMachine.OnGameStarted -= Relock;
         }
 

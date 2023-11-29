@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Units.Heroes;
+using Units;
 
 namespace GameBoard
 {
@@ -56,7 +57,7 @@ namespace GameBoard
         public Hero Hero => _hero;
         public GameObject SpawnPoint => _spawnPoint;
 
-        public static UnityAction<Cell> CellClicked;
+        public static UnityAction<Cell> OnCellClicked;
 
         private void OnValidate()
         {
@@ -65,18 +66,18 @@ namespace GameBoard
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            CellClicked?.Invoke(this);
+            OnCellClicked?.Invoke(this);
         }
 
         public void SetHero(Hero hero)
         {
             _hero = hero;
-            _hero.OnUnitDie += RemoveHero;
+            _hero.OnUnitDied += RemoveHero;
         }
 
-        private void RemoveHero()
+        private void RemoveHero(Unit unit)
         {
-            _hero.OnUnitDie -= RemoveHero;
+            _hero.OnUnitDied -= RemoveHero;
             _hero = null;
         }
 

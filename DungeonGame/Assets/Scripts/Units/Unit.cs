@@ -17,7 +17,7 @@ namespace Units
         private IAttackBehaviour _attackBehaviour;
         private bool _isReloading = false;
 
-        public Action OnUnitDie;
+        public event Action<Unit> OnUnitDied;
         public int Health => _health;
         public float AttackCooldown => _attackCooldown;
 
@@ -80,7 +80,7 @@ namespace Units
         public virtual void Die()
         {
             ReleaseItem();
-            OnUnitDie?.Invoke();
+            OnUnitDied?.Invoke(this);
         }
 
         public virtual void Attack(Unit enemy)

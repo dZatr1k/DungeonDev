@@ -246,7 +246,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   _observeArea: {fileID: 0}
-  _health: 100
+  _health: 75
   _attackCooldown: 0
   _weapon: {fileID: 0}
   _cost: 50
