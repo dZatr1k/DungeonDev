@@ -26,8 +26,6 @@ public class Energy : PoolItem, IPointerClickHandler
 
     private void OnEnable()
     {
-        GetComponent<SpriteRenderer>().color = Color.white;
-        _energyAnimator = FindObjectOfType<EnergyAnimator>();
         _lifeCoroutine = StartCoroutine(LifeLoopCoroutine());
     }
 
@@ -47,6 +45,7 @@ public class Energy : PoolItem, IPointerClickHandler
 
     public override void SetDefaultSettings()
     {
+        GetComponent<SpriteRenderer>().color = Color.white;
         _collider2D.enabled = true;
     }
 
