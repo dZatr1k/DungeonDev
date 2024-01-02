@@ -9,14 +9,13 @@ namespace GameBoard
     public class HeroPlacer : MonoBehaviour
     {
         [SerializeField] private PoolsCatalog _poolsCatalog;
-        [SerializeField] private GameObject _heroParent;
         [SerializeField] private EnergyResourcesSystem _energyResourcesSystem;
         
         private Hero _heroToPlace = null;
 
         private bool _isLocked = true;
 
-        public static Action<Cell> OnHeroPlaced;
+        public static event Action<Cell> OnHeroPlaced;
 
         private void OnEnable()
         {

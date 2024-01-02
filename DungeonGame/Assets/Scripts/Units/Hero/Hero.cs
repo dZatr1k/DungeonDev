@@ -14,8 +14,8 @@ namespace Units.Heroes
             if (_weapon == null)
                 return;
 
-            var field = FindObjectOfType<Field>();
-            var delta = field.EndPoint.position - transform.position;
+            Field field = transform.parent.parent.GetComponent<DataForUnits>().Field;
+            Vector2 delta = field.EndPoint.position - transform.position;
             _observeArea.size = new Vector2(delta.x, _observeArea.size.y);
             _observeArea.offset = new Vector2(delta.x / 2, _observeArea.offset.y);
         }

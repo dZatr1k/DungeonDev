@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Energy : PoolItem, IPointerClickHandler
 {
+    private static EnergyAnimator Animator;
+
     [SerializeField] private Collider2D _collider2D;
     [SerializeField] private uint _energyUnits = 2;
     [SerializeField] private float _lifeTime = 2.5f;
@@ -17,11 +19,13 @@ public class Energy : PoolItem, IPointerClickHandler
     public override GameObject GameObject => gameObject;
     public uint EnergyUnits => _energyUnits;
 
-    public static event Action<Energy> EnergyCollected;
+    public static event Action<Energy> OnEnergyCollected;
 
-    private void OnValidate()
+    private void Start()
     {
-        _energyAnimator ??= FindObjectOfType<EnergyAnimator>();
+        if (Animator == null)
+            Animator = FindObjectOfType<EnergyAnimator>();
+        _energyAnimator = Animator;
     }
 
     private void OnEnable()
@@ -38,7 +42,7 @@ public class Energy : PoolItem, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         _collider2D.enabled = false;
-        EnergyCollected?.Invoke(this);
+        OnEnergyCollected?.Invoke(this);
         _energyAnimator.AnimateAfterCollect(this);
         StopCoroutine(_lifeCoroutine);
     }

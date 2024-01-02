@@ -8,7 +8,7 @@ namespace ObjectPool
     {
         [SerializeField] private List<PoolsSettings> _poolsSettingsPair;
         [SerializeField] private int _defaultPoolSize;
-        [SerializeField] private GameObject _parent;
+        [SerializeField] private Transform _parent;
 
         private readonly Dictionary<Type, CustomUnityPool> _pools = new Dictionary<Type, CustomUnityPool>();
 
@@ -18,7 +18,7 @@ namespace ObjectPool
             for (int i = 0; i < _poolsSettingsPair.Count; i++)
             {
                 var poolItem = _poolsSettingsPair[i].PoolItem;
-                var pool = new CustomUnityPool(poolItem, _poolsSettingsPair[i].Size, poolItem.ItemType.ToString(), _parent.transform);
+                var pool = new CustomUnityPool(poolItem, _poolsSettingsPair[i].Size, poolItem.ItemType.ToString(), _parent);
                 _pools.Add(poolItem.ItemType, pool);
             }
         }
@@ -28,7 +28,7 @@ namespace ObjectPool
             Type typeOfObject = obj.ItemType;
             if (!_pools.ContainsKey(typeOfObject))
             {
-                _pools.Add(typeOfObject, new CustomUnityPool(obj, _defaultPoolSize, typeOfObject.ToString(), _parent.transform));
+                _pools.Add(typeOfObject, new CustomUnityPool(obj, _defaultPoolSize, typeOfObject.ToString(), _parent));
             }
             return _pools[typeOfObject];
         }

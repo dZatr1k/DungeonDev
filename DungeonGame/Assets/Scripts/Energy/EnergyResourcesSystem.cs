@@ -10,12 +10,12 @@ public class EnergyResourcesSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        Energy.EnergyCollected += IncreaseEnergyResources;
+        Energy.OnEnergyCollected += IncreaseEnergyResources;
     }
 
     private void OnDisable()
     {
-        Energy.EnergyCollected -= IncreaseEnergyResources;
+        Energy.OnEnergyCollected -= IncreaseEnergyResources;
     }
 
     private void Start()

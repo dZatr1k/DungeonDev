@@ -7,16 +7,16 @@ namespace ObjectPool
     {
         private ObjectPool<PoolItem> _pool;
         private PoolItem _poolItem;
-        private Transform _parent;
-        private Transform _parentOfParents;
+        private Transform _itemsGroup;
+        private Transform _groupsParent;
 
-        public CustomUnityPool(PoolItem prefab, int maxSize, string parentName, Transform parentOfParents)
+        public CustomUnityPool(PoolItem prefab, int maxSize, string itemsGroupName, Transform groupsParent)
         {
             _poolItem = prefab;
             _pool = new ObjectPool<PoolItem>(OnCreate, OnGet, OnRelease, OnDestroy, false, maxSize: maxSize);
-            _parentOfParents = parentOfParents.transform;
-            _parent = new GameObject(parentName).transform;
-            _parent.parent = _parentOfParents;
+            _groupsParent = groupsParent.transform;
+            _itemsGroup = new GameObject(itemsGroupName).transform;
+            _itemsGroup.parent = _groupsParent;
         }
 
         public PoolItem Get()
@@ -48,7 +48,7 @@ namespace ObjectPool
 
         private PoolItem OnCreate()
         {
-            return Object.Instantiate(_poolItem, _parent);
+            return Object.Instantiate(_poolItem, _itemsGroup);
         }
     }
 }

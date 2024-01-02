@@ -7,7 +7,8 @@ namespace Units
 {
     public abstract class Unit : PoolItem
     {
-        [SerializeField] protected ContactFilter2D _contactFilter;
+        private static int DefaultHealth;
+
         [SerializeField] protected BoxCollider2D _observeArea;
         [SerializeField] protected int _health;
         [SerializeField] protected float _attackCooldown;
@@ -17,23 +18,26 @@ namespace Units
         private IAttackBehaviour _attackBehaviour;
         private bool _isReloading = false;
 
-        public event Action<Unit> OnUnitDied;
         public int Health => _health;
         public float AttackCooldown => _attackCooldown;
-
+        public CustomUnityPool WeaponPool { get; private set; }
         public uint Cost => _cost;
-
         public override Type ItemType { get => GetType(); }
         public override GameObject GameObject => gameObject;
 
+        public event Action<Unit> OnUnitDied;
+        
         private void Start()
         {
+            DefaultHealth = _health;
+
             if (_weapon == null)
                 return;
             switch (_weapon.AttackType)
             {
                 case WeaponAttackType.Throw:
                 case WeaponAttackType.DoubleThrow:
+                    WeaponPool = transform.parent.parent.GetComponent<DataForUnits>().PoolsCatalog.GetPool(_weapon);
                     _attackBehaviour = new RenewableAttack();
                     break;
                 case WeaponAttackType.Hand:
@@ -42,30 +46,20 @@ namespace Units
             }
         }
 
-        private void FixedUpdate()
+        private void OnEnable()
         {
-            CheckObserveArea();
+            StartCoroutine(ReloadCoroutine());
         }
 
-        private void CheckObserveArea()
+        private void OnTriggerStay2D(Collider2D collision)
         {
             if (_weapon == null || _isReloading)
                 return;
 
-            Collider2D[] hits = new Collider2D[3];
-            _observeArea.OverlapCollider(_contactFilter, hits);
-
-            foreach (var collision in hits)
+            if (collision.gameObject.TryGetComponent(out Unit unit))
             {
-                if (collision == null)
-                    continue;
-                if (collision.gameObject.TryGetComponent(out Unit unit))
-                {
-                    Debug.Log("attack");
-                    Attack(unit);
-                    StartCoroutine(ReloadCoroutine());
-                    break;
-                }
+                Attack(unit);
+                StartCoroutine(ReloadCoroutine());
             }
         }
 
@@ -74,7 +68,6 @@ namespace Units
             _isReloading = true;
             yield return new WaitForSeconds(RandomExtensions.GetNumberInEpsilonAmbit(_attackCooldown));
             _isReloading = false;
-            Debug.Log("reload" + GetType());
         }
 
         public virtual void Die()
@@ -100,6 +93,12 @@ namespace Units
             {
                 Die();
             }
+        }
+
+        protected override void ReleaseItem()
+        {
+            _health = DefaultHealth;
+            _isReloading = false;
         }
     }
 }
