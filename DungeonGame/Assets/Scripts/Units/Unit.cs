@@ -11,7 +11,7 @@ namespace Units
 
         [SerializeField] protected BoxCollider2D _observeArea;
         [SerializeField] protected int _health;
-        [SerializeField] protected float _attackCooldown;
+        [SerializeField] protected float _abilityCooldown;
         [SerializeField] protected Weapon _weapon;
         [SerializeField] protected uint _cost;
 
@@ -19,7 +19,6 @@ namespace Units
         private bool _isReloading = false;
 
         public int Health => _health;
-        public float AttackCooldown => _attackCooldown;
         public CustomUnityPool WeaponPool { get; private set; }
         public uint Cost => _cost;
         public override Type ItemType { get => GetType(); }
@@ -66,7 +65,7 @@ namespace Units
         private IEnumerator ReloadCoroutine()
         {
             _isReloading = true;
-            yield return new WaitForSeconds(RandomExtensions.GetNumberInEpsilonAmbit(_attackCooldown));
+            yield return new WaitForSeconds(RandomExtensions.GetNumberInEpsilonAmbit(_abilityCooldown));
             _isReloading = false;
         }
 

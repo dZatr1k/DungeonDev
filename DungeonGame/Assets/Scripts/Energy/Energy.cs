@@ -20,6 +20,7 @@ public class Energy : PoolItem, IPointerClickHandler
     public uint EnergyUnits => _energyUnits;
 
     public static event Action<Energy> OnEnergyCollected;
+    public event Action OnEnergyDisable;
 
     private void Start()
     {
@@ -31,6 +32,11 @@ public class Energy : PoolItem, IPointerClickHandler
     private void OnEnable()
     {
         _lifeCoroutine = StartCoroutine(LifeLoopCoroutine());
+    }
+
+    private void OnDisable()
+    {
+        OnEnergyDisable?.Invoke();
     }
 
     private IEnumerator LifeLoopCoroutine()
