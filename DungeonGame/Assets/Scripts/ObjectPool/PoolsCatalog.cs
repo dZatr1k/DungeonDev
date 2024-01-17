@@ -6,11 +6,24 @@ namespace ObjectPool
 {
     public class PoolsCatalog : MonoBehaviour
     {
+        private static PoolsCatalog _instance;
+        public static PoolsCatalog Instance => _instance;
+
         [SerializeField] private List<PoolsSettings> _poolsSettingsPair;
         [SerializeField] private int _defaultPoolSize;
         [SerializeField] private Transform _parent;
 
         private readonly Dictionary<Type, CustomUnityPool> _pools = new Dictionary<Type, CustomUnityPool>();
+
+        private void OnValidate()
+        {
+            if (_instance != null)
+            {
+                Debug.LogError("Component PoolsCatalog already exist in current scene");
+                return;
+            }
+            _instance = this;
+        }
 
         private void Awake()
         {

@@ -36,7 +36,7 @@ namespace Units
             {
                 case WeaponAttackType.Throw:
                 case WeaponAttackType.DoubleThrow:
-                    WeaponPool = transform.parent.parent.GetComponent<DataForUnits>().PoolsCatalog.GetPool(_weapon);
+                    WeaponPool = PoolsCatalog.Instance.GetPool(_weapon);
                     _attackBehaviour = new RenewableAttack();
                     break;
                 case WeaponAttackType.Hand:

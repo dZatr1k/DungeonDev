@@ -15,7 +15,7 @@ namespace Units.Heroes
 
         private void Start()
         {
-            _energyPool = transform.parent.parent.GetComponent<DataForUnits>().PoolsCatalog.GetPool(_energyPrefab);
+            _energyPool = PoolsCatalog.Instance.GetPool(_energyPrefab);
             StartCoroutine(SpawnEnergyCoroutine());
         }
 
