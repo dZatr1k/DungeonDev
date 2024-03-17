@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2351093655829051968}
   - component: {fileID: 8734714489845441065}
   - component: {fileID: 3594962330417624508}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: WildDino
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07079792, y: -0.003296852}
+  m_Offset: {x: 0.21, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -112,7 +112,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.85840416, y: 0.55376434}
+  m_Size: {x: 0.51, y: 0.55}
   m_EdgeRadius: 0
 --- !u!50 &8734714489845441065
 Rigidbody2D:
@@ -147,25 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067157b1e48d9cd41a3ac6d1eca7dc49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contactFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
+  _settings: {fileID: 0}
   _observeArea: {fileID: 8501253745713245773}
-  _health: 50
-  _attackCooldown: 3
-  _weapon: {fileID: 0}
-  _cost: 100
   _reloadAfterBuyTime: 5
 --- !u!1 &7202758191821072629
 GameObject:
@@ -177,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3306062518290890983}
   - component: {fileID: 8501253745713245773}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ObserveArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

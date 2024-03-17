@@ -5,7 +5,7 @@ using Units;
 
 public abstract class Weapon : PoolItem
 {
-    [SerializeField] protected int _damage;
+    [SerializeField] protected uint _damage;
     [SerializeField] protected Rigidbody2D _body;
     [SerializeField] protected WeaponAttackType _attackType;
 

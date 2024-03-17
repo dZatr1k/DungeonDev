@@ -4,14 +4,10 @@ using GameBoard;
 namespace Units.Heroes
 {
     public abstract class Hero : Unit
-    {
-        [SerializeField] private float _reloadAfterBuyTime;
-        
-        public float ReloadAfterBuyTime => _reloadAfterBuyTime;
-        
-        public void ChangeObserveArea()
+    {       
+        public void SetObserveArea()
         {
-            if (_weapon == null)
+            if (Weapon == null)
                 return;
 
             Field field = transform.parent.parent.GetComponent<DataForUnits>().Field;

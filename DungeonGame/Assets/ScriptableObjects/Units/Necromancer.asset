@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6678c03ba1170c43979e170c0bf2795, type: 3}
-  m_Name: 4_LevelData
+  m_Script: {fileID: 11500000, guid: 550c81a57cd0ea74cb9d101caf374300, type: 3}
+  m_Name: Necromancer
   m_EditorClassIdentifier: 
-  _numberOfLevel: 1
-  _enemies:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _health: 50
+  _weapon: {fileID: 0}
+  _abilityCooldown: 5
+  _cost: 0

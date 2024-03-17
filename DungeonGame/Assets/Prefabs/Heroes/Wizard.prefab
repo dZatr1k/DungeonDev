@@ -25,9 +25,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135945682553925285}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.436, y: 0.025, z: 0}
+  m_LocalPosition: {x: 0.436, y: 0.024999976, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1421955669354634262}
   m_RootOrder: 0
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6606827344244397293}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 4999477776733696873}
   - component: {fileID: 2087001958539291392}
   - component: {fileID: 5386806706443820128}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7810828378527436075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.441047, y: -6.370043, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -217,7 +217,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07079792, y: -0.003296852}
+  m_Offset: {x: 0.075, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -228,7 +228,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.85840416, y: 0.55376434}
+  m_Size: {x: 0.85, y: 0.55}
   m_EdgeRadius: 0
 --- !u!50 &2087001958539291392
 Rigidbody2D:
@@ -263,25 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa5bc3ac28b3c3418ab530666db6f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contactFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
+  _settings: {fileID: 0}
   _observeArea: {fileID: 0}
-  _health: 25
-  _attackCooldown: 8
-  _weapon: {fileID: 0}
-  _cost: 50
   _reloadAfterBuyTime: 5
   _energyPrefab: {fileID: 3262491251930569669, guid: 5d59627f259bd1e429564f0c79679961, type: 3}
   _spawnPoint: {fileID: 6606827344244397293}

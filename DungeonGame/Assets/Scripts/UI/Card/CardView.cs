@@ -2,30 +2,42 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
+using TMPro;
 
 namespace Card
 {
     public class CardView : MonoBehaviour
     {
+        [SerializeField] private Card _card;
+        [Space]
+        [SerializeField] private TextMeshProUGUI _costLabel;
+        [SerializeField] private Image _heroView;
+        [Space]
         [SerializeField] private Image _haze;
         [SerializeField] private Image _hazeToAnimate;
         [SerializeField] private Image _error;
         [SerializeField] private float _errorTime;
         [SerializeField] private int _loopCount;
-        [SerializeField] private Card _cardToAnimate;
+
 
         private void OnEnable()
         {
             _haze.enabled = false;
         }
 
+        private void Start()
+        {
+            _costLabel.text = _card.CardSettings.Cost.ToString();
+            _heroView.sprite = _card.Hero.GetComponent<SpriteRenderer>().sprite;
+        }
+
         private IEnumerator HideBuyHazeCoroutine()
         {
-            var tween = _hazeToAnimate.DOFillAmount(0, _cardToAnimate.Hero.ReloadAfterBuyTime).SetEase(Ease.Linear);
+            var tween = _hazeToAnimate.DOFillAmount(0, _card.CardSettings.ReloadingTimeAfterBuy).SetEase(Ease.Linear);
             yield return tween.WaitForCompletion();
             _haze.enabled = false;
-            _hazeToAnimate.enabled = false;
-            _cardToAnimate.Activate();
+            _hazeToAnimate.enabled = false; 
+            _card.Activate();
         }
 
         public void HideBuyHaze()

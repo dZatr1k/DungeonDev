@@ -469,9 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
-  _hero: {fileID: 4142105476253001997, guid: 3a9961ca9ffb4fe45afe30cec95e6578, type: 3}
-  _text: {fileID: 6607470492113767688}
-  _heroView: {fileID: 2844110952633407733}
+  _heroCardSettings: {fileID: 11400000, guid: 76c33e8878a6827478a47987496a110c, type: 2}
   _cardView: {fileID: 6091102650907610590}
 --- !u!114 &6091102650907610590
 MonoBehaviour:
@@ -485,12 +483,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59d1ae3abd023949a9107dfe47613e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _costLabel: {fileID: 6607470492113767688}
+  _heroView: {fileID: 2844110952633407733}
   _haze: {fileID: 3137124005623925655}
   _hazeToAnimate: {fileID: 979536679681915571}
   _error: {fileID: 3175306603075777290}
   _errorTime: 0.1
   _loopCount: 3
-  _cardToAnimate: {fileID: 6702735554381456988}
+  _card: {fileID: 6702735554381456988}
 --- !u!1 &7400592244177865692
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +593,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7481267976641399579}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

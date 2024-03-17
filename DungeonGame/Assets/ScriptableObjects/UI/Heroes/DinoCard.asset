@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6678c03ba1170c43979e170c0bf2795, type: 3}
-  m_Name: 9_LevelData
+  m_Script: {fileID: 11500000, guid: 5ccd5a9ee5f847645881acd1094922c4, type: 3}
+  m_Name: DinoCard
   m_EditorClassIdentifier: 
-  _numberOfLevel: 1
-  _enemies:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _cost: 50
+  _hero: {fileID: 4142105476253001997, guid: 3a9961ca9ffb4fe45afe30cec95e6578, type: 3}
+  _reloadingTimeAfterBuy: 5

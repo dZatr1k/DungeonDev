@@ -37,8 +37,8 @@ namespace GameBoard
             {
                 Hero hero = _poolsCatalog.GetPool(_heroToPlace).Get().GetComponent<Hero>();
                 hero.transform.position = cell.SpawnPoint.transform.position;
-                hero.ChangeObserveArea();
                 cell.SetHero(hero);
+                hero.SetObserveArea();
                 OnHeroPlaced?.Invoke(cell);
             }
         }

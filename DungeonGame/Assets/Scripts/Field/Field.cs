@@ -1,7 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
 using LevelLogic;
-using System.Collections;
 
 namespace GameBoard
 {

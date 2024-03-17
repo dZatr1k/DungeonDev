@@ -2,29 +2,24 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Units.Heroes;
-using TMPro;
 using UnityEngine.UI;
 
 namespace Card
 {
     public class Card : MonoBehaviour, IPointerClickHandler
     {
-        public static event Action<Card> OnClick;
+        public static event Action<Card> OnClicked;
         
         [SerializeField] private int _id;
-        [SerializeField] private Hero _hero;
-        [SerializeField] private TextMeshProUGUI _text;
-        [SerializeField] private Image _heroView;
+        [SerializeField] private CardSettings _heroCardSettings;
         [SerializeField] private CardView _cardView;
 
         public CardView CardView => _cardView;
-        public Hero Hero => _hero;
+        public Hero Hero => _heroCardSettings.Hero;
 
-        private void Start()
-        {
-            _text.text = _hero.Cost.ToString();
-            _heroView.sprite = _hero.GetComponent<SpriteRenderer>().sprite;
-        }
+        public CardSettings CardSettings => _heroCardSettings;
+
+
 
         public int ID
         {
@@ -53,7 +48,7 @@ namespace Card
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnClick?.Invoke(this);
+            OnClicked?.Invoke(this);
         }
     }
 }

@@ -22,13 +22,13 @@ namespace Card
         private void OnEnable()
         {
             Level.Instance.CurrentStateMachine.OnStateChanged += ChangeCardBehaviour;
-            Card.OnClick += OnCardClick;
+            Card.OnClicked += OnCardClick;
         }
 
         private void OnDisable()
         {
             Level.Instance.CurrentStateMachine.OnStateChanged += ChangeCardBehaviour;
-            Card.OnClick -= OnCardClick;
+            Card.OnClicked -= OnCardClick;
         }
 
         private void ChangeCardBehaviour(LevelState state)

@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6678c03ba1170c43979e170c0bf2795, type: 3}
-  m_Name: 5_LevelData
+  m_Script: {fileID: 11500000, guid: 5ccd5a9ee5f847645881acd1094922c4, type: 3}
+  m_Name: KnightCard
   m_EditorClassIdentifier: 
-  _numberOfLevel: 1
-  _enemies:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _cost: 75
+  _hero: {fileID: 6578154673697906493, guid: 6c60729c42ec588478f57811b9bf6f82, type: 3}
+  _reloadingTimeAfterBuy: 5
