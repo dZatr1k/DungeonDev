@@ -125,9 +125,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1421955669354634262}
   - component: {fileID: 2826987304368449936}
+  - component: {fileID: 5386806706443820128}
   - component: {fileID: 4999477776733696873}
   - component: {fileID: 2087001958539291392}
-  - component: {fileID: 5386806706443820128}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
@@ -204,6 +204,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5386806706443820128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7810828378527436075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa5bc3ac28b3c3418ab530666db6f4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 0}
+  _observeArea: {fileID: 0}
+  _energyPrefab: {fileID: 3262491251930569669, guid: 5d59627f259bd1e429564f0c79679961, type: 3}
+  _spawnPoint: {fileID: 6606827344244397293}
 --- !u!61 &4999477776733696873
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -251,20 +267,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5386806706443820128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7810828378527436075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa5bc3ac28b3c3418ab530666db6f4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _settings: {fileID: 0}
-  _observeArea: {fileID: 0}
-  _reloadAfterBuyTime: 5
-  _energyPrefab: {fileID: 3262491251930569669, guid: 5d59627f259bd1e429564f0c79679961, type: 3}
-  _spawnPoint: {fileID: 6606827344244397293}

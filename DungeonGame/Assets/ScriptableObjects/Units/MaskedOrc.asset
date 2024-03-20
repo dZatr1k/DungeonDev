@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 550c81a57cd0ea74cb9d101caf374300, type: 3}
-  m_Name: Dino
+  m_Name: MaskedOrc
   m_EditorClassIdentifier: 
   _health: 50
-  _weapon: {fileID: -1059512529294637131, guid: 3d07e8cb60ecaa543805078225152268, type: 3}
-  _abilityCooldown: 3
+  _weapon: {fileID: 0}
+  _abilityCooldown: 5
+  _cost: 0

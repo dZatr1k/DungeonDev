@@ -21,11 +21,12 @@ namespace Units
         public override GameObject GameObject => gameObject;
 
         public event Action<Unit> OnUnitDied;
-        
-        //Here I use Awake instead Start because I need initializate object earlier than Start (SetObzerveArea)
+
         private void Awake()
         {
             SetSettings();
+            if (Weapon != null)
+                Weapon = Instantiate(Weapon, transform);
         }
 
         private void OnEnable()
@@ -33,7 +34,7 @@ namespace Units
             StartCoroutine(ReloadCoroutine());
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerStay2D(Collider2D collision)
         {
             if (Weapon == null || _isReloading || collision.tag == "Field")
                 return;
@@ -65,9 +66,15 @@ namespace Units
             OnUnitDied?.Invoke(this);
         }
 
-        public virtual void Attack(Unit enemy)
+        protected virtual void Attack(Unit unit)
         {
-            Debug.Log($"[{name}]: I'm attaking [{enemy.name}]!");
+            TryAttack<Unit>(unit);
+        }
+
+        protected void TryAttack<T>(Unit target) where T : Unit
+        {
+            if (target is T prey)
+                Weapon.Attack(this, prey);
         }
 
         public virtual bool IsAlive()
@@ -84,11 +91,10 @@ namespace Units
             }
         }
 
-        protected override void ReleaseItem()
+        public override void SetDefaultSettings()
         {
             Health = _settings.Health;
             _isReloading = true;
-            base.ReleaseItem();
         }
     }
 }

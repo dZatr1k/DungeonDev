@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 926480181128135622}
   - component: {fileID: 6876534328098553569}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ObserveArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 2658689376963017914}
   - component: {fileID: 7198921653672733419}
   - component: {fileID: -5163705887973236683}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Necromancer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3998bdafdbcbbdb4093a07da9d07152d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings: {fileID: 11400000, guid: 7916dddcc93264642ae8ff9b5b452ec5, type: 2}
+  _settings: {fileID: 11400000, guid: c784ba2b03b38294581fbdde0f684fcd, type: 2}
   _observeArea: {fileID: 6876534328098553569}
 --- !u!114 &2658689376963017914
 MonoBehaviour:
