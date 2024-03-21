@@ -74,7 +74,7 @@ namespace Units
         protected void TryAttack<T>(Unit target) where T : Unit
         {
             if (target is T prey)
-                Weapon.Attack(this, prey);
+                Weapon.Attack<T>(this, prey);
         }
 
         public virtual bool IsAlive()
@@ -89,6 +89,7 @@ namespace Units
             {
                 Die();
             }
+            Debug.Log($"[{name}] I'm on attack (I have {Health} points health!)");
         }
 
         public override void SetDefaultSettings()

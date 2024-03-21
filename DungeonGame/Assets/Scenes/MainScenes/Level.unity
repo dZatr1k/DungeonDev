@@ -440,7 +440,7 @@ MonoBehaviour:
   _poolsSettingsPair:
   - _size: 10
     _poolItem: {fileID: 3262491251930569669, guid: 5d59627f259bd1e429564f0c79679961, type: 3}
-  _defaultPoolSize: 7
+  _defaultPoolSize: 10
   _parent: {fileID: 427537090}
 --- !u!1 &33248161
 GameObject:

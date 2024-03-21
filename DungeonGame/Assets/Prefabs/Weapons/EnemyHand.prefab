@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6635200825317394988
+--- !u!1 &2000607478196209822
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3279299889464700602}
-  - component: {fileID: -1059512529294637131}
+  - component: {fileID: 3804355486140857717}
+  - component: {fileID: 1956872597035482580}
   m_Layer: 0
-  m_Name: KnifeWeapon
+  m_Name: EnemyHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3279299889464700602
+--- !u!4 &3804355486140857717
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6635200825317394988}
+  m_GameObject: {fileID: 2000607478196209822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,17 +32,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1059512529294637131
+--- !u!114 &1956872597035482580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6635200825317394988}
+  m_GameObject: {fileID: 2000607478196209822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728f46faf5dd80a49bbf487962c52fa5, type: 3}
+  m_Script: {fileID: 11500000, guid: e185d2d41ab644146a66c9218b7558fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
-  _bullet: {fileID: 314595890018818033, guid: a192fb26df42e1b4fa1ce7763888e1a9, type: 3}
