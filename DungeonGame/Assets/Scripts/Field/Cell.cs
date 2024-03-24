@@ -3,14 +3,18 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Units.Heroes;
 using Units;
+using System.Collections.Generic;
 
 namespace GameBoard
 {
     public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        private const string ENEMY_TAG_NAME = "Enemy";
+
         [SerializeField] private GameObject _spawnPoint;
 
         private SpriteRenderer _renderer;
+        private Collider2D _collider;
         private int _lineNumber;
         private int _index;
 
@@ -50,10 +54,7 @@ namespace GameBoard
 
         private Hero _hero;
 
-        public bool IsCorrupted => _hero != null;
-
         public SpriteRenderer Renderer => _renderer;
-
         public Hero Hero => _hero;
         public GameObject SpawnPoint => _spawnPoint;
 
@@ -62,6 +63,7 @@ namespace GameBoard
         private void OnValidate()
         {
             _renderer = GetComponent<SpriteRenderer>();
+            _collider = GetComponent<Collider2D>();
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -81,6 +83,16 @@ namespace GameBoard
             _hero = null;
         }
 
+        public bool IsCellFree()
+        {
+            var colliders = GetCollidersWithTag(
+                Physics2D.OverlapBoxAll(_collider.bounds.center, _collider.bounds.size, 0f), ENEMY_TAG_NAME);
+
+            if (_hero == null && colliders.Count == 0)
+                return true;
+            return false;
+        }
+
         public void OnPointerEnter(PointerEventData eventData)
         {
             GetComponentInParent<Field>().Fog(this);
@@ -90,6 +102,16 @@ namespace GameBoard
         {
             GetComponentInParent<Field>().Defog(this);
         }
-    }
 
+        private List<Collider2D> GetCollidersWithTag(Collider2D[] colliders, string tag)
+        {
+            var collidersWithTag = new List<Collider2D>();
+            foreach (Collider2D collider in colliders)
+                if (collider.CompareTag(tag))
+                    collidersWithTag.Add(collider);
+
+            return collidersWithTag;
+        }
+    }
 }
+

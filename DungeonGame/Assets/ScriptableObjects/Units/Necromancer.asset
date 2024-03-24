@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 50
   _weapon: {fileID: 1956872597035482580, guid: f1d7cb6ead70ef341abf123890a3f10f, type: 3}
-  _abilityCooldown: 5
+  _abilityCooldown: 3

@@ -33,7 +33,7 @@ namespace GameBoard
         {
             if (_isLocked)
                 return;
-            if (cell.IsCorrupted == false && IsSelected())
+            if (cell.IsCellFree())
             {
                 Hero hero = _poolsCatalog.GetPool(_heroToPlace).Get().GetComponent<Hero>();
                 hero.transform.position = cell.SpawnPoint.transform.position;
