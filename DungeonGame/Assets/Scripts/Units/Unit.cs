@@ -7,42 +7,26 @@ namespace Units
 {
     public abstract class Unit : PoolItem
     {
-        private static int DefaultHealth;
-
+        [SerializeField] private UnitSettings _settings;
         [SerializeField] protected BoxCollider2D _observeArea;
-        [SerializeField] protected int _health;
-        [SerializeField] protected float _abilityCooldown;
-        [SerializeField] protected Weapon _weapon;
-        [SerializeField] protected uint _cost;
+        protected float _abilityCooldown;
 
-        private IAttackBehaviour _attackBehaviour;
         private bool _isReloading = false;
 
-        public int Health => _health;
-        public CustomUnityPool WeaponPool { get; private set; }
-        public uint Cost => _cost;
+        public uint Health            { get; private set; }
+        public Weapon Weapon          { get; private set; }
+        public uint Cost              { get; private set; }
+
         public override Type ItemType { get => GetType(); }
         public override GameObject GameObject => gameObject;
 
         public event Action<Unit> OnUnitDied;
-        
-        private void Start()
-        {
-            DefaultHealth = _health;
 
-            if (_weapon == null)
-                return;
-            switch (_weapon.AttackType)
-            {
-                case WeaponAttackType.Throw:
-                case WeaponAttackType.DoubleThrow:
-                    WeaponPool = PoolsCatalog.Instance.GetPool(_weapon);
-                    _attackBehaviour = new RenewableAttack();
-                    break;
-                case WeaponAttackType.Hand:
-                    _attackBehaviour = new NonRenewableAttack();
-                    break;
-            }
+        private void Awake()
+        {
+            SetSettings();
+            if (Weapon != null)
+                Weapon = Instantiate(Weapon, transform);
         }
 
         private void OnEnable()
@@ -52,14 +36,21 @@ namespace Units
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (_weapon == null || _isReloading)
+            if (Weapon == null || _isReloading || collision.tag == "Field")
                 return;
-
             if (collision.gameObject.TryGetComponent(out Unit unit))
             {
                 Attack(unit);
                 StartCoroutine(ReloadCoroutine());
             }
+        }
+
+        private void SetSettings()
+        {
+            Health = _settings.Health;
+            Weapon = _settings.Weapon;
+
+            _abilityCooldown = _settings.AbilityCooldown;
         }
 
         private IEnumerator ReloadCoroutine()
@@ -75,29 +66,36 @@ namespace Units
             OnUnitDied?.Invoke(this);
         }
 
-        public virtual void Attack(Unit enemy)
+        protected virtual void Attack(Unit unit)
         {
-            _attackBehaviour?.Attack(this, enemy, _weapon);
+            TryAttack<Unit>(unit);
+        }
+
+        protected void TryAttack<T>(Unit target) where T : Unit
+        {
+            if (target is T prey)
+                Weapon.Attack<T>(this, prey);
         }
 
         public virtual bool IsAlive()
         {
-            return _health > 0;
+            return Health > 0;
         }
 
-        public virtual void TakeDamage(int damage)
+        public virtual void TakeDamage(uint damage)
         {
-            _health = damage >= _health ? 0 : _health - damage;
+            Health = damage >= Health ? 0 : Health - damage;
             if (IsAlive() == false)
             {
                 Die();
             }
+            //Debug.Log($"[{name}] I'm on attack (I have {Health} points health!)");
         }
 
-        protected override void ReleaseItem()
+        public override void SetDefaultSettings()
         {
-            _health = DefaultHealth;
-            _isReloading = false;
+            Health = _settings.Health;
+            _isReloading = true;
         }
     }
 }

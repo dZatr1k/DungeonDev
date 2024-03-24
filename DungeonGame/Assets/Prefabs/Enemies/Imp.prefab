@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 926480181128135622}
   - component: {fileID: 6876534328098553569}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ObserveArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,13 +68,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7198921653672733422}
   - component: {fileID: 7198921653672733417}
+  - component: {fileID: -3700074793607958840}
   - component: {fileID: 2658689376963017914}
   - component: {fileID: 7198921653672733419}
   - component: {fileID: -5163705887973236683}
-  - component: {fileID: -3700074793607958840}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Imp
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7198921653672733418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.62, y: -0.86, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -147,6 +147,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3700074793607958840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7198921653672733418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e861a8f9ecf554ba456a50adc59bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: 7916dddcc93264642ae8ff9b5b452ec5, type: 2}
+  _observeArea: {fileID: 6876534328098553569}
 --- !u!114 &2658689376963017914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,34 +222,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &-3700074793607958840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7198921653672733418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e861a8f9ecf554ba456a50adc59bff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _contactFilter:
-    useTriggers: 1
-    useLayerMask: 1
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 1024
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  _observeArea: {fileID: 6876534328098553569}
-  _health: 15
-  _attackCooldown: 3
-  _weapon: {fileID: 5124092920168573980, guid: 72940ef0a4eca2f48ae903fba8e74264, type: 3}
-  _cost: 0

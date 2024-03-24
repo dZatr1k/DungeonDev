@@ -1,17 +1,19 @@
 using UnityEngine;
 using GameBoard;
+using Units.Enemies;
 
 namespace Units.Heroes
 {
     public abstract class Hero : Unit
     {
-        [SerializeField] private float _reloadAfterBuyTime;
-        
-        public float ReloadAfterBuyTime => _reloadAfterBuyTime;
-        
-        public void ChangeObserveArea()
+        protected override void Attack(Unit target)
         {
-            if (_weapon == null)
+            TryAttack<Enemy>(target);
+        }
+
+        public void SetObserveArea()
+        {
+            if (Weapon == null)
                 return;
 
             Field field = transform.parent.parent.GetComponent<DataForUnits>().Field;
