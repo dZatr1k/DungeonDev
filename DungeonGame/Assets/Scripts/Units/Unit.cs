@@ -89,7 +89,7 @@ namespace Units
             {
                 Die();
             }
-            Debug.Log($"[{name}] I'm on attack (I have {Health} points health!)");
+            //Debug.Log($"[{name}] I'm on attack (I have {Health} points health!)");
         }
 
         public override void SetDefaultSettings()

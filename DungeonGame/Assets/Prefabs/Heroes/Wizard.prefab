@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa5bc3ac28b3c3418ab530666db6f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings: {fileID: 0}
+  _settings: {fileID: 11400000, guid: 70325f83e9eff8d41bbb13cc23ffa5b5, type: 2}
   _observeArea: {fileID: 0}
   _energyPrefab: {fileID: 3262491251930569669, guid: 5d59627f259bd1e429564f0c79679961, type: 3}
   _spawnPoint: {fileID: 6606827344244397293}

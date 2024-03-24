@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3804355486140857717}
   - component: {fileID: 1956872597035482580}
   m_Layer: 0
-  m_Name: EnemyHand
+  m_Name: MaskedOrcHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e185d2d41ab644146a66c9218b7558fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damage: 10

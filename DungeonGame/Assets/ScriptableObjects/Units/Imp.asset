@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Imp
   m_EditorClassIdentifier: 
   _health: 50
-  _weapon: {fileID: 0}
+  _weapon: {fileID: 1956872597035482580, guid: 7359a25b1864df648bfe3b3d7f04fa55, type: 3}
   _abilityCooldown: 5
-  _cost: 0
