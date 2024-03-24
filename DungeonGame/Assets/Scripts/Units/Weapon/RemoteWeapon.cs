@@ -17,6 +17,6 @@ public class RemoteWeapon : Weapon
     {
         Bullet bullet = (Bullet)_pool.Get();
         bullet.transform.position = transform.position;
-        bullet.Shoot(target.transform);
+        bullet.Shoot(target.transform.position);
     }
 }

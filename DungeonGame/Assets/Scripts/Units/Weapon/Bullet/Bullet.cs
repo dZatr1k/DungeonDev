@@ -8,7 +8,9 @@ public abstract class Bullet : PoolItem
     [SerializeField] private float _speed = 1f;
     [SerializeField] private Weapon _weapon;
     private bool _isShooted = false;
-    private Transform _target;
+
+    private Vector3 _direction;
+    private Vector3 _targetPos;
     protected uint _damage;
 
     public override Type ItemType { get => GetType(); }
@@ -23,7 +25,7 @@ public abstract class Bullet : PoolItem
     {
         if (_isShooted)
         {
-            transform.position = Vector2.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+            transform.Translate(_direction * _speed * Time.deltaTime);
         }
     }
 
@@ -32,10 +34,13 @@ public abstract class Bullet : PoolItem
         TryDamageUnit(collision.gameObject.GetComponent<Unit>());
     }
 
-    public void Shoot(Transform target)
+    public void Shoot(Vector3 targetPos)
     {
-        _target = target;
+        _targetPos = targetPos;
         _isShooted = true;
+
+        _direction = (_targetPos - transform.position).normalized;
+        _direction = transform.InverseTransformDirection(_direction);
     }
 
     protected abstract void TryDamageUnit<T>(T unit) where T : Unit;
